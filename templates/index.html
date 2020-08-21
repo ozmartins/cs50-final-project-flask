@@ -7,11 +7,13 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="./static/style.css">
 
     <title>Hello, world!</title>
   </head>
-  <body>    
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <body>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="#">
             <img src="./static/icons8-fund-accounting-48.png" width="30" height="30" alt="" loading="lazy">
         </a>
@@ -19,7 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="#">Visão geral <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="#">Visão geral<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Ações</a>
@@ -39,7 +41,54 @@
                 <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Pesquisar</button>
             </form>
         </div>
-    </nav>    
+    </nav>
+
+    <div class="content">
+        <div class="row">
+          <div class="column2">
+            <div class="card">
+              <h1>IBOVESPA</h1>
+              <h2>105.975</h2>
+            </div>
+            <div style="display: inline-block; border: 1px solid black;">
+              <div style="display: inline-block; border: 1px solid black;">
+                <h2>Min. 52 sem.</h2>
+                <h3>65.175</h3>
+              </div>
+              <div style="display: inline-block; border: 1px solid black;">
+                <h2>Max. 52 sem.</h2>
+                <h3>119.255</h3>
+              </div>
+            </div>            
+          </div>          
+          <div class="column2">
+            <div class="card">
+              <h1>IFIX</h1>
+              <h2>2.745</h2>
+            </div>
+          </div>          
+        </div>
+        <div class="row">
+          <div class="column3">
+            <div class="card">
+              <h1>SELIC</h1>
+              <h2>3,5 %</h2>
+            </div>
+          </div>          
+          <div class="column3">
+            <div class="card">
+              <h1>CDI</h1>
+              <h2>3,4 %</h2>
+            </div>
+          </div>
+          <div class="column3">
+            <div class="card">
+              <h1>IPCA</h1>
+              <h2>2,5 %</h2>
+            </div>
+          </div>
+        </div>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
