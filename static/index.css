@@ -5,7 +5,8 @@ body {
 
 .content {
   background-color: white;    
-  max-width: 60%;
+  max-width: 50%;
+  min-width: 992px;
   margin: auto;
   padding: 1%;
 }

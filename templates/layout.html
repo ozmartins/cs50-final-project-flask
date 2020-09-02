@@ -7,8 +7,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    
-    <link rel="stylesheet" href="./static/menu.css">  
+    <link rel="stylesheet" href="./static/style.css">
+        
     {% block style %}{% endblock %}
 
     <title>Hello, world!</title>
@@ -18,8 +18,10 @@
         <a class="navbar-brand" href="#">
             <img src="./static/icons8-fund-accounting-48.png" width="30" height="30" alt="" loading="lazy">
         </a>
-        
-        <div class="collapse navbar-collapse" id="navbarColor02">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                   <a class="nav-link" href="#">Visão geral<span class="sr-only">(current)</span></a>
