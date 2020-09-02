@@ -7,7 +7,7 @@ body {
   max-width: 50%;
   min-width: 992px;
   margin: auto;
-  padding: 1%;
+  padding: 1%;  
 }
 
 * {
@@ -15,21 +15,21 @@ body {
 }
 
 .column1 {
-float: left;
-width: 100%;
-padding: 0 10px;
+  float: left;
+  width: 100%;
+  padding: 0 10px;  
 }
 
 .column2 {
   float: left;
   width: 50%;
-  padding: 0 10px;
+  padding: 0 10px;  
 }
 
 .column3 {
   float: left;
   width: 33.33%;
-  padding: 0 10px;
+  padding: 0 10px;  
 }
 
 .row {
@@ -51,9 +51,16 @@ padding: 0 10px;
   color: #555    
 }
 
+.news-card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  padding: 16px;  
+  background-color: white;  
+}
+
 .card h1 {
   font-size: 4em;
   font-weight: bold;
+  color:#57d3ff;
 }
 
 .card h2 {
@@ -63,6 +70,7 @@ padding: 0 10px;
 
 .card h3 {
   font-size: 1.5em;   
+  color:#57d3ff;
 }
 
 .card h4 {
@@ -70,19 +78,15 @@ padding: 0 10px;
   color: gray;
 }
 
-.ibovespa {
+.ibovespa-tile {
   background-color: #00cc66;
   color: white;
 }
 
-.ibovespa h2, .ibovespa h3, .ibovespa h4 {
-  color: white;
+.ifix-tile h1, .ifix-tile h3 {
+  color: #00cc66;
 }
 
-@media screen and (max-width: 600px) {
-  .column {
-      width: 100%;
-      display: block;
-      margin-bottom: 20px;
-  }
+.ibovespa-tile h1, .ibovespa-tile h2, .ibovespa-tile h3, .ibovespa-tile h4 {
+  color: white;
 }
