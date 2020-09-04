@@ -6,39 +6,107 @@
 
 {% block main %}
 <div class="container">
-  <h2 id="indicadores">Indicadores</h2>
+  <h2 id="indicators-title">Indicadores</h2>
   <div class="hbox row">
-    <div class="box">      
+    <div class="box ibovespa">
+      <div>
+        <div class="col">
+          <h2>IBOVESPA</h2>
+          <p>102.545</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col sub-indicator">
+          <h3>Min 52 semanas</h3>
+          <p>63.245</p>
+        </div>
+        <div class="col sub-indicator">
+          <h3>Max 52 semanas</h3>
+          <p>121.145</p>
+        </div>
+      </div>
     </div>
-    <div class="box">      
+    <div class="box">
+      <div>
+        <div class="col">
+          <h2>IFIX</h2>
+          <p>2.765</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col sub-indicator">
+          <h3>Min 52 semanas</h3>
+          <p>1.745</p>
+        </div>
+        <div class="col sub-indicator">
+          <h3>Max 52 semanas</h3>
+          <p>3.240</p>
+        </div>
+      </div>
     </div>
   </div>
   <div class="hbox row">
-    <div class="box">      
+    <div class="box">    
+      <div>
+        <div class="col">
+          <h2>SELIC (12 meses)</h2>
+          <p>4.5 %</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col sub-indicator">
+          <h3>Agosto/2020</h3>
+          <p>0.375 %</p>
+        </div>        
+      </div>        
     </div>
     <div class="box">      
-    </div>
+      <div>
+        <div class="col">
+          <h2>CDI (12 meses)</h2>
+          <p>4.4 %</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col sub-indicator">
+          <h3>Agosto/2020</h3>
+          <p>0.36 %</p>
+        </div>        
+      </div>
+    </div>    
     <div class="box">      
+      <div>
+        <div class="col">
+          <h2>IPCA (12 meses)</h2>
+          <p>2.5 %</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col sub-indicator">
+          <h3>Agosto/2020</h3>
+          <p>0.20 %</p>
+        </div>        
+      </div>
     </div>
   </div>
-  <section class="noticias">
-    <h2 id="noticias">Notícias</h2>
-    <article class="hbox noticia">
+  <section class="news-list">
+    <h2 id="news-list-title">Notícias</h2>
+    <article class="hbox news">
       <div class="side img-container">
         <img src="./static/nova-previdencia-privada.jpg" alt="">
       </div>
-      <div class="conteudo">
-        <header class="cabeçalho">
+      <div class="content">
+        <header class="header">
           <h3 class="titulo">Título da matéria</h3>
         </header>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur convallis mattis tortor, eu fermentum diam condimentum id. Morbi non lacus neque. Cras efficitur lacus non auctor suscipit. Praesent tempor consequat risus, vitae convallis ante hendrerit in. Nam feugiat ligula id dolor suscipit, eget tincidunt arcu dignissim. Proin tempus, nibh sagittis pulvinar hendrerit, eros sapien gravida nunc, id lacinia lorem enim in dui. Ut volutpat dui pharetra, pellentesque risus vitae, rhoncus mi.</p>
       </div>
     </article>
-    <article class="hbox noticia">
+    <article class="hbox news">
       <div class="side img-container">
         <img src="./static/money-times.png" alt="">
       </div>
-      <div class="conteudo">
+      <div class="content">
         <header class="cabeçalho">
           <h3 class="titulo">Título da matéria</h3>
         </header>
