@@ -1,0 +1,128 @@
+body {
+  background-color: #efefef;    
+  font-family: Arial, Helvetica, sans-serif;  
+}
+
+.content {
+  max-width: 50%;
+  min-width: 992px;
+  margin: auto;
+  padding: 1%;  
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.column1 {
+  float: left;
+  width: 100%;
+  padding: 0 10px;  
+}
+
+.column2 {
+  float: left;
+  width: 50%;
+  padding: 0 10px;  
+}
+
+.column3 {
+  float: left;
+  width: 33.33%;
+  padding: 0 10px;  
+}
+
+.row {
+  margin: 0 -5px;
+  padding-bottom: 15px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: white;
+  color: #555    
+}
+
+.news-card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  padding: 16px;  
+  background-color: white;     
+  display: inline-block;
+}
+
+.card h1 {
+  font-size: 4em;
+  font-weight: bold;
+  color:#555;
+}
+
+.card h2 {
+  font-size: 1em;  
+  color: gray;
+}
+
+.card h3 {
+  font-size: 1.5em;   
+  color:#555;
+}
+
+.card h4 {
+  font-size: 0.8em; 
+  color: gray;
+}
+
+.ifix-tile {
+  background-color: #00BFFF;
+  color: white;
+}
+
+.ibovespa-tile {
+  background-color: #00cc66;
+  color: white;
+}
+
+.rate-tile {
+  background-color: #E9967A;
+  color: white;
+}
+
+.card h1, .card h2, .card h3, .card h4 {
+  color: white;
+}
+
+.news-source {
+  color: gray;  
+}
+
+.news-headline {
+  color: #555; 
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.news-image {
+  float: left;
+  width: 20%;
+}
+
+.news-image img {
+  width: auto;
+}
+
+.news-info {
+  float: left;
+  width: 80%;
+  padding-left: 10px;
+}
+
+a:hover {
+  text-decoration: none;
+}
