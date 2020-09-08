@@ -31,8 +31,46 @@ Session(app)
 
 
 @app.route("/")
-def index():            
-    return render_template("index.html")
+def index():      
+    ibovespa = {
+            "current": "102.000",
+            "min52weeks": "65.000",
+            "max52weeks": "120.000"
+        }
+
+    ifix = {
+            "current": "2.000",
+            "min52weeks": "1.000",
+            "max52weeks": "3.000"
+        }
+
+    selic = {
+            "yearrate": "3%",
+            "monthrate": "0.2%",
+            "monthname": "Agosto/2020"
+        }
+
+    cdi = {
+            "year": "2.9%",
+            "monthrate": "0.19%",
+            "monthname": "Agosto/2020"
+        }
+
+    ipca = {
+            "year": "2%",
+            "monthrate": "0.1%",
+            "monthname": "Agosto/2020"
+        }
+
+    indicators = {
+        "ibovespa": ibovespa,
+        "ifix": ifix,
+        "selic": selic,
+        "cdi": cdi,
+        "ipca": ipca
+    }
+
+    return render_template("index.html", indicators=indicators)
 
 
 def errorhandler(e):    

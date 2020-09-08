@@ -12,17 +12,17 @@
       <div>
         <div class="col">
           <h2>IBOVESPA</h2>
-          <p>102.545</p>
+          <p>{{indicators["ibovespa"]["current"]}}</p>
         </div>
       </div>
       <div class="row">
         <div class="col sub-indicator">
           <h3>Min 52 semanas</h3>
-          <p>63.245</p>
+          <p>{{indicators["ibovespa"]["min52weeks"]}}</p>
         </div>
         <div class="col sub-indicator">
           <h3>Max 52 semanas</h3>
-          <p>121.145</p>
+          <p>{{indicators["ibovespa"]["max52weeks"]}}</p>
         </div>
       </div>
     </div>
@@ -30,17 +30,17 @@
       <div>
         <div class="col">
           <h2>IFIX</h2>
-          <p>2.765</p>
+          <p>{{indicators["ifix"]["current"]}}</p>
         </div>
       </div>
       <div class="row">
         <div class="col sub-indicator">
           <h3>Min 52 semanas</h3>
-          <p>1.745</p>
+          <p>{{indicators["ifix"]["min52weeks"]}}</p>
         </div>
         <div class="col sub-indicator">
           <h3>Max 52 semanas</h3>
-          <p>3.240</p>
+          <p>{{indicators["ifix"]["max52weeks]}}</p>
         </div>
       </div>
     </div>
@@ -50,13 +50,13 @@
       <div>
         <div class="col">
           <h2>SELIC (12 meses)</h2>
-          <p>4.5 %</p>
+          <p>{{indicators["selic"]["yearrate"]}}</p>
         </div>
       </div>
       <div class="row">
         <div class="col sub-indicator">
-          <h3>Agosto/2020</h3>
-          <p>0.375 %</p>
+          <h3>{{indicators["selic"]["monthname"]}}</h3>
+          <p>{{indicators["selic"]["monthrate"]}}</p>
         </div>        
       </div>        
     </div>
@@ -64,13 +64,13 @@
       <div>
         <div class="col">
           <h2>CDI (12 meses)</h2>
-          <p>4.4 %</p>
+          <p>{{indicators["cdi"]["yearrate"]}}</p>
         </div>
       </div>
       <div class="row">
         <div class="col sub-indicator">
-          <h3>Agosto/2020</h3>
-          <p>0.36 %</p>
+          <h3>{{indicators["cdi"]["monthname"]}}</h3>
+          <p>{{indicators["cdi"]["monthrate"]}}</p>
         </div>        
       </div>
     </div>    
@@ -78,13 +78,13 @@
       <div>
         <div class="col">
           <h2>IPCA (12 meses)</h2>
-          <p>2.5 %</p>
+          <p>{{indicators["ipca"]["yearrate"]}}</p>
         </div>
       </div>
       <div class="row">
         <div class="col sub-indicator">
-          <h3>Agosto/2020</h3>
-          <p>0.20 %</p>
+          <h3>{{indicators["ipca"]["monthname"]}}</h3>
+          <p>{{indicators["ipca"]["monthrate"]}}</p>
         </div>        
       </div>
     </div>
