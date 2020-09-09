@@ -7,6 +7,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 import requests
 from helpers import apology
+from market_data import get_market_indicators, get_market_news
 
 # Configure application
 app = Flask(__name__)
@@ -31,59 +32,13 @@ Session(app)
 
 
 @app.route("/")
-def index():      
-    ibovespa = {
-            "current": "102.000",
-            "min52weeks": "65.000",
-            "max52weeks": "120.000"
-        }
+def index():              
+    return render_template("index.html", indicators=get_market_indicators(), news=get_market_news())
 
-    ifix = {
-            "current": "2.000",
-            "min52weeks": "1.000",
-            "max52weeks": "3.000"
-        }
 
-    selic = {
-            "yearrate": "3%",
-            "monthrate": "0.2%",
-            "monthname": "Agosto/2020"
-        }
-
-    cdi = {
-            "yearrate": "2.9%",
-            "monthrate": "0.19%",
-            "monthname": "Agosto/2020"
-        }
-
-    ipca = {
-            "yearrate": "2%",
-            "monthrate": "0.1%",
-            "monthname": "Agosto/2020"
-        }
-
-    indicators = {
-        "ibovespa": ibovespa,
-        "ifix": ifix,
-        "selic": selic,
-        "cdi": cdi,
-        "ipca": ipca
-    }
-
-    news = [
-        {
-            "image": "./static/nova-previdencia-privada.jpg",
-            "headline": "Manchete da primeira notícia",
-            "text": "Texto da primeira notícia"
-        },
-        {
-            "image": "./static/money-times.png",
-            "headline": "Manchete da segunda notícia",
-            "text": "Texto da segunda notícia"
-        },        
-    ]
-
-    return render_template("index.html", indicators=indicators, news=news)
+@app.route("/stocks")
+def stocks():   
+    return render_template("stocks.html")
 
 
 def errorhandler(e):    
