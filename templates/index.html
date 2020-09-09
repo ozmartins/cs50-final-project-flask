@@ -40,14 +40,14 @@
         </div>
         <div class="col sub-indicator">
           <h3>Max 52 semanas</h3>
-          <p>{{indicators["ifix"]["max52weeks]}}</p>
+          <p>{{indicators["ifix"]["max52weeks"]}}</p>
         </div>
       </div>
     </div>
   </div>
   <div class="hbox row">
     <div class="box">    
-      <div>
+      <div class="row">
         <div class="col">
           <h2>SELIC (12 meses)</h2>
           <p>{{indicators["selic"]["yearrate"]}}</p>
@@ -60,8 +60,9 @@
         </div>        
       </div>        
     </div>
-    <div class="box">      
-      <div>
+
+    <div class="box">    
+      <div class="row">
         <div class="col">
           <h2>CDI (12 meses)</h2>
           <p>{{indicators["cdi"]["yearrate"]}}</p>
@@ -72,10 +73,11 @@
           <h3>{{indicators["cdi"]["monthname"]}}</h3>
           <p>{{indicators["cdi"]["monthrate"]}}</p>
         </div>        
-      </div>
-    </div>    
-    <div class="box">      
-      <div>
+      </div>        
+    </div>      
+
+    <div class="box">    
+      <div class="row">
         <div class="col">
           <h2>IPCA (12 meses)</h2>
           <p>{{indicators["ipca"]["yearrate"]}}</p>
@@ -86,35 +88,26 @@
           <h3>{{indicators["ipca"]["monthname"]}}</h3>
           <p>{{indicators["ipca"]["monthrate"]}}</p>
         </div>        
-      </div>
-    </div>
+      </div>        
+    </div>      
   </div> 
 </div>
 <div class="container">  
   <section class="news-list">
     <h2 id="news-list-title">Notícias</h2>
+    {% for item in news%}
     <article class="hbox news">
       <div class="side img-container">
-        <img src="./static/nova-previdencia-privada.jpg" alt="">
+        <img src="{{item["image"]}}" alt="">
       </div>
       <div class="content">
         <header class="header">
-          <h3 class="titulo">Título da matéria</h3>
+          <h3 class="titulo">{{item["headline"]}}</h3>
         </header>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur convallis mattis tortor, eu fermentum diam condimentum id. Morbi non lacus neque. Cras efficitur lacus non auctor suscipit. Praesent tempor consequat risus, vitae convallis ante hendrerit in. Nam feugiat ligula id dolor suscipit, eget tincidunt arcu dignissim. Proin tempus, nibh sagittis pulvinar hendrerit, eros sapien gravida nunc, id lacinia lorem enim in dui. Ut volutpat dui pharetra, pellentesque risus vitae, rhoncus mi.</p>
+        <p>{{item["text"]}}</p>
       </div>
     </article>
-    <article class="hbox news">
-      <div class="side img-container">
-        <img src="./static/money-times.png" alt="">
-      </div>
-      <div class="content">
-        <header class="cabeçalho">
-          <h3 class="titulo">Título da matéria</h3>
-        </header>
-        <p>Notícia bem curtinha</p>
-      </div>
-    </article>
+    {%endfor%}
   </section>
 </div>
 {% endblock %}

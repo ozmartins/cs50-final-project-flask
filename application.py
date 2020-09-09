@@ -51,13 +51,13 @@ def index():
         }
 
     cdi = {
-            "year": "2.9%",
+            "yearrate": "2.9%",
             "monthrate": "0.19%",
             "monthname": "Agosto/2020"
         }
 
     ipca = {
-            "year": "2%",
+            "yearrate": "2%",
             "monthrate": "0.1%",
             "monthname": "Agosto/2020"
         }
@@ -70,7 +70,20 @@ def index():
         "ipca": ipca
     }
 
-    return render_template("index.html", indicators=indicators)
+    news = [
+        {
+            "image": "./static/nova-previdencia-privada.jpg",
+            "headline": "Manchete da primeira notícia",
+            "text": "Texto da primeira notícia"
+        },
+        {
+            "image": "./static/money-times.png",
+            "headline": "Manchete da segunda notícia",
+            "text": "Texto da segunda notícia"
+        },        
+    ]
+
+    return render_template("index.html", indicators=indicators, news=news)
 
 
 def errorhandler(e):    
