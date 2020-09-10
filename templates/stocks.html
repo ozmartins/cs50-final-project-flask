@@ -1,12 +1,34 @@
 {% extends "layout.html" %}
 
 {% block style %}
-<link rel="stylesheet" href="./static/index.css">
+<link rel="stylesheet" href="./static/stocks.css">
 {% endblock %}
 
 {% block main %}
-$('#stocks-tab a').on('click', function (e) {
-    e.preventDefault()
-    $(this).tab('show')
-  })
+
+<div class="top-bar">
+    <input type="text" placeholder="Busque uma empresa">
+    <span>Ordenar por</span>
+    <select name="order" id="order">
+        <option value="0">Valor de mercado</option>
+        <option value="0">Tempo de IPO</option>
+    </select>
+    <img src="./static/grid-view-icon.png" alt="">
+    <img src="./static/list-view-icon.png" alt="">
+</div>
+
+<div class="content">
+    <div class="filter-panel">
+        <p>Setor</p>
+        <p>Sub-setor</p>
+        <p>Segmento</p>
+    </div>
+    <div class="stock-list">
+        <img src="./static/money-times.png" alt="">
+    </div>
+</div>
+
+<script>  
+    selectTab("stocks-tab");
+</script>
 {% endblock %}

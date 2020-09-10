@@ -21,7 +21,7 @@ p {
 
 .img-container img {
   display: block;
-  width: 100%;
+  width: 100%;  
 }
 
 * {
@@ -45,7 +45,7 @@ p {
 }
 
 .container {  
-  width: 780px;
+  width: 780px;  
   margin: auto;
   background-color: #eee;  
   padding-bottom: 20px;

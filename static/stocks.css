@@ -1,0 +1,31 @@
+html {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;  
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+.top-bar {
+  background-color: coral;
+}
+
+.filter-panel {
+  background-color: skyblue;  
+}
+
+.content { 
+  display: inline-block; 
+}
+
+.filter-panel {  
+  width: 200px;
+  background-color: slateblue;
+}
+
+.stock-list {
+  background-color: teal;  
+}
