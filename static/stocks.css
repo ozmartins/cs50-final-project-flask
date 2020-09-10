@@ -13,19 +13,26 @@ html {
   background-color: coral;
 }
 
-.filter-panel {
-  background-color: skyblue;  
+.column {
+  float: left;
 }
 
-.content { 
-  display: inline-block; 
+.column.left-side {
+  width: 15%;
+  background-color: blue;
 }
 
-.filter-panel {  
-  width: 200px;
-  background-color: slateblue;
+.column.center {
+  width: 85%;
+  background-color: red;
 }
 
-.stock-list {
-  background-color: teal;  
+.checkbox {
+  display: block;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
