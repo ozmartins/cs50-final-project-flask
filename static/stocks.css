@@ -14,24 +14,18 @@ html {
 }
 
 .column {
-  float: left;
+  float: left;  
 }
 
 .column.left-side {
-  width: 15%;
-  background-color: blue;
+  width: 15%;    
 }
 
 .column.center {
   width: 85%;
-  background-color: red;
 }
 
-.checkbox {
-  display: block;
-}
-
-.row:after {
+.stocks:after {
   content: "";
   display: table;
   clear: both;
