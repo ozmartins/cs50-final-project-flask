@@ -3,6 +3,10 @@ html {
   font-family: Arial, Helvetica, sans-serif;  
 }
 
+label {
+  padding-left: 10px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -40,8 +44,24 @@ html {
   width: 85%;
 }
 
+.column.center img{
+  margin-bottom: 5px;
+  width: 190px;
+  height: 190px;
+}
+
 .stocks:after {
   content: "";
   display: table;
   clear: both;
+}
+
+.button {  
+  width: 80%;  
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.filter-group {
+  font-weight: bold;
 }
