@@ -42,6 +42,7 @@ label {
 
 .column.center {
   width: 85%;
+  background-color: #eee;
 }
 
 .column.center img{
@@ -64,4 +65,15 @@ label {
 
 .filter-group {
   font-weight: bold;
+}
+
+.card {
+  float: left;
+  margin: 10px 0 0 10px;
+}
+
+.card-body {
+  height: 30px;;
+  padding: 0;  
+  text-align: center;
 }
