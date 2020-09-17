@@ -9,9 +9,10 @@
 <div class="top-bar">
     <input type="text" placeholder="Busque uma empresa">
     <span>Ordenar por</span>
-    <select name="order" id="order">
-        <option value="0">Valor de mercado</option>
-        <option value="0">Tempo de IPO</option>
+    <select name="order" id="order">                
+        {% for item in orderby_criterias %}
+        <option value="{{item["id"]}}">{{item["description"]}}</option>
+        {% endfor %}
     </select>    
     <img src="/static/grid-view-icon-selected.png" alt="">
     <img src="/static/list-view-icon.png" alt="">
@@ -19,137 +20,28 @@
 
 <div class="stocks">
     <div class="column left-side">
+        {% for item in filters %}
         <div>
-            <div><p class="filter-group">Setores</p></div>
-            <div><input type="checkbox" name="setor-1" id="setor-1"><label for="setor-1">Setor 1</label></div>
-            <div><input type="checkbox" name="setor-2" id="setor-2"><label for="setor-2">Setor 2</label></div>
-            <div><input type="checkbox" name="setor-3" id="setor-3"><label for="setor-3">Setor 3</label></div>
-            <div><input type="checkbox" name="setor-4" id="setor-4"><label for="setor-4">Setor 4</label></div>
+            <div><p class="filter-group">{{item["description"]}}</p></div>
+            {% for option in item["options"] %}
+              <div><input type="checkbox" name="filter-{{item["id"]}}{{option["id"]}}" id="filter-{{item["id"]}}{{option["id"]}}"><label for="filter-{{item["id"]}}{{option["id"]}}">{{option["description"]}}</label></div>
+            {% endfor %}
             <div><a href="#">Ver todos</a></div>
             <div><input class="button btn btn-dark" type="button" value="Aplicar"></div>
-        </div>                
-        <div>
-            <div><p class="filter-group">Sub-Setores</p></div>
-            <div><input type="checkbox" name="subsetor-1" id="subsetor-1"><label for="subsetor-1">Sub-Setor 1</label></div>
-            <div><input type="checkbox" name="subsetor-2" id="subsetor-2"><label for="subsetor-2">Sub-Setor 2</label></div>
-            <div><input type="checkbox" name="subsetor-3" id="subsetor-3"><label for="subsetor-3">Sub-Setor 3</label></div>
-            <div><input type="checkbox" name="subsetor-4" id="subsetor-4"><label for="subsetor-4">Sub-Setor 4</label></div>
-            <div><a href="#">Ver todos</a></div>
-            <div><input class="button btn btn-dark" type="button" value="Aplicar">        </div>
-        </div>        
+        </div>
+        {% endfor %}
     </div>
     <div class="column center">
-        <div class="card">
-            <img src="./static/companies-logo/ABEV.gif" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">AMBEV</h5>
-            </div>
-        </div>
-        <div class="card">
-            <img src="./static/companies-logo/B3SA.gif" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">B3SA</h5>
-            </div>
-        </div>
-        <div class="card">
-            <img src="./static/companies-logo/BBAS.gif" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">BBAS</h5>
-            </div>
-        </div>
-        <div class="card">
-            <img src="./static/companies-logo/BBDC.gif" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">BBDC</h5>
-            </div>
-        </div>
-        <div class="card">
-            <img src="./static/companies-logo/CIEL.gif" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">CIEL</h5>
-            </div>
-        </div>
-        <div class="card">
-            <img src="./static/companies-logo/COGN.gif" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">COGN</h5>
-            </div>
-        </div>
-        <div class="card">
-            <img src="./static/companies-logo/CVCB.gif" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">CVCB</h5>
-            </div>
-        </div>
-        <div class="card">
-            <img src="./static/companies-logo/EGIE.gif" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">EGIE</h5>
-            </div>
-        </div>
-        <div class="card">
-            <img src="./static/companies-logo/ENBR.gif" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">ENBR</h5>
-            </div>
-        </div>
-        <div class="card">
-            <img src="./static/companies-logo/EQTL.gif" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">EQTL</h5>
-            </div>
-        </div>
-        <div class="card">
-            <img src="./static/companies-logo/EZTC.gif" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">EZTC</h5>
-            </div>
-        </div>
-        <div class="card">
-            <img src="./static/companies-logo/FLRY.gif" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">FLRY</h5>
-            </div>
-        </div>
-        <div class="card">
-            <img src="./static/companies-logo/GRND.gif" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">GRND</h5>
-            </div>
-        </div>
-        <div class="card">
-            <img src="./static/companies-logo/GUAR.gif" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">GUAR</h5>
-            </div>
-        </div>
-        <div class="card">
-            <img src="./static/companies-logo/HGTX.gif" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">HGTX</h5>
-            </div>
-        </div>
-        <div class="card">
-            <img src="./static/companies-logo/HYPE.gif" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">HYPE</h5>
-            </div>
-        </div>
-        <div class="card">
-            <img src="./static/companies-logo/IRBR.gif" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">IRBR</h5>
-            </div>
-        </div>
-        <div class="card">
-            <img src="./static/companies-logo/ITUB.gif" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">ITUB</h5>
-            </div>
-        </div>
-    </var>
+        {% for item in stock_list %}
+          <div class="card">
+              <img src="./static/companies-logo/{{item}}.gif" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{item}}</h5>
+              </div>
+          </div>
+        {% endfor %}
     </div>
-</div>
+</div>S
 
 <script>  
     selectTab("stocks-tab");

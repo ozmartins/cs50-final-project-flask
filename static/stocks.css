@@ -43,6 +43,7 @@ label {
 .column.center {
   width: 85%;
   background-color: #eee;
+  padding-bottom: 10px;
 }
 
 .column.center img{
@@ -70,6 +71,10 @@ label {
 .card {
   float: left;
   margin: 10px 0 0 10px;
+}
+
+.card img {
+  margin: 10px;
 }
 
 .card-body {

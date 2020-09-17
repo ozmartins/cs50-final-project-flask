@@ -8,7 +8,8 @@ from werkzeug.exceptions import default_exceptions, HTTPException, InternalServe
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 from helpers import apology
-from market_data import get_market_indicators, get_market_news
+from indicators import get_market_indicators, get_market_news
+from stocks import get_orderby_criterias, get_filters, get_stock_list
 
 
 # Configure application
@@ -39,8 +40,8 @@ def index():
 
 
 @app.route("/stocks")
-def stocks():   
-    return render_template("stocks.html")
+def stocks():       
+    return render_template("stocks.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list())
 
 
 def errorhandler(e):    
