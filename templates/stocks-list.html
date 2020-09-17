@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block style %}
-<link rel="stylesheet" href="./static/stocks.css">
+<link rel="stylesheet" href="/static/stocks.css">
 {% endblock %}
 
 {% block main %}
@@ -14,8 +14,8 @@
         <option value="{{item["id"]}}">{{item["description"]}}</option>
         {% endfor %}
     </select>    
-    <img src="/static/grid-view-icon-selected.png" alt="">
-    <img src="/static/list-view-icon.png" alt="">
+    <a href="/stocks/grid"><img src="/static/grid-view-icon.png" alt=""></a>
+    <a href="/stocks/list"><img src="/static/list-view-icon-selected.png" alt=""></a>
 </div>
 
 <div class="stocks">
@@ -33,15 +33,12 @@
     </div>
     <div class="column center">
         {% for item in stock_list %}
-          <div class="card">
-              <img src="./static/companies-logo/{{item}}.gif" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">{{item}}</h5>
-              </div>
+          <div class="stock-row">
+              <img src="/static/companies-logo/{{item}}.gif" class="card-img-top" alt="...">              
           </div>
         {% endfor %}
     </div>
-</div>S
+</div>
 
 <script>  
     selectTab("stocks-tab");

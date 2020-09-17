@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block style %}
+<link rel="stylesheet" href="/static/stocks.css">
+{% endblock %}
+
+{% block main %}
+
+<div class="top-bar">
+    <input type="text" placeholder="Busque uma empresa">
+    <span>Ordenar por</span>
+    <select name="order" id="order">                
+        {% for item in orderby_criterias %}
+        <option value="{{item["id"]}}">{{item["description"]}}</option>
+        {% endfor %}
+    </select>    
+    <a href="/stocks/grid"><img src="/static/grid-view-icon-selected.png" alt=""></a>
+    <a href="/stocks/list"><img src="/static/list-view-icon.png" alt=""></a>
+</div>
+
+<div class="stocks">
+    <div class="column left-side">
+        {% for item in filters %}
+        <div>
+            <div><p class="filter-group">{{item["description"]}}</p></div>
+            {% for option in item["options"] %}
+              <div><input type="checkbox" name="filter-{{item["id"]}}{{option["id"]}}" id="filter-{{item["id"]}}{{option["id"]}}"><label for="filter-{{item["id"]}}{{option["id"]}}">{{option["description"]}}</label></div>
+            {% endfor %}
+            <div><a href="#">Ver todos</a></div>
+            <div><input class="button btn btn-dark" type="button" value="Aplicar"></div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="column center">
+        {% for item in stock_list %}
+          <div class="card">
+              <img src="/static/companies-logo/{{item}}.gif" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{item}}</h5>
+              </div>
+          </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>  
+    selectTab("stocks-tab");
+</script>
+{% endblock %}
