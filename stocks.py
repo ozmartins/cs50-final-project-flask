@@ -89,7 +89,7 @@ def get_stock_list():
             "sector": "Setor",
             "subsector": "Sub-setor",
             "segment": "Segment",
-            "description": "Faz cervejas e bebidas e afins. Faz cervejas e bebidas e afins. Faz cervejas e bebidas e afins. Faz cervejas e bebidas e afins. Faz cervejas e bebidas e afins."
+            "description": "A Ambev é uma empresa brasileira dedicada à produção e distribuição de bebidas, entre as quais cervejas, refrigerantes, energéticos, sucos, chás e água. A empresa esta presente em países das Américas e 30 marcas de bebidas, dentre elas Skol, Brahma, Stella Artois e Budweiser. Apenas no Brasil a empresa dispõe de 32 cervejarias e 2 maltarias."
         },
         {
             "ticker": "B3SA",
@@ -97,7 +97,7 @@ def get_stock_list():
             "sector": "Setor",
             "subsector": "Sub-setor",
             "segment": "Segmento",
-            "description": "Intermedia a venda de ações e outros ativos. Intermedia a venda de ações e outros ativos. Intermedia a venda de ações e outros ativos. Intermedia a venda de ações e outros ativos."
+            "description": "A Ambev é uma empresa brasileira dedicada à produção e distribuição de bebidas, entre as quais cervejas, refrigerantes, energéticos, sucos, chás e água. A empresa esta presente em países das Américas e 30 marcas de bebidas, dentre elas Skol, Brahma, Stella Artois e Budweiser. Apenas no Brasil a empresa dispõe de 32 cervejarias e 2 maltarias."
         },
         {
             "ticker": "BBAS",
@@ -105,7 +105,7 @@ def get_stock_list():
             "sector": "Setor",
             "subsector": "Sub-setor",
             "segment": "Segmento",
-            "description": "Banco mais antigo do Brasil. Banco mais antigo do Brasil. Banco mais antigo do Brasil. Banco mais antigo do Brasil. Banco mais antigo do Brasil. Banco mais antigo do Brasil. "
+            "description": "A Ambev é uma empresa brasileira dedicada à produção e distribuição de bebidas, entre as quais cervejas, refrigerantes, energéticos, sucos, chás e água. A empresa esta presente em países das Américas e 30 marcas de bebidas, dentre elas Skol, Brahma, Stella Artois e Budweiser. Apenas no Brasil a empresa dispõe de 32 cervejarias e 2 maltarias."
         },
         {
             "ticker": "BBDC",
@@ -113,7 +113,88 @@ def get_stock_list():
             "sector": "Setor",
             "subsector": "Sub-setor",
             "segment": "Segmento",
-            "description": "Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. "
+            "description": "A Ambev é uma empresa brasileira dedicada à produção e distribuição de bebidas, entre as quais cervejas, refrigerantes, energéticos, sucos, chás e água. A empresa esta presente em países das Américas e 30 marcas de bebidas, dentre elas Skol, Brahma, Stella Artois e Budweiser. Apenas no Brasil a empresa dispõe de 32 cervejarias e 2 maltarias."
+        },
+        {
+            "ticker": "CIEL",
+            "name": "Cielo",
+            "sector": "Setor",
+            "subsector": "Sub-setor",
+            "segment": "Segmento",
+            "description": "A Ambev é uma empresa brasileira dedicada à produção e distribuição de bebidas, entre as quais cervejas, refrigerantes, energéticos, sucos, chás e água. A empresa esta presente em países das Américas e 30 marcas de bebidas, dentre elas Skol, Brahma, Stella Artois e Budweiser. Apenas no Brasil a empresa dispõe de 32 cervejarias e 2 maltarias."
+        },
+        {
+            "ticker": "COGN",
+            "name": "COGNA",
+            "sector": "Setor",
+            "subsector": "Sub-setor",
+            "segment": "Segmento",
+            "description": "A Ambev é uma empresa brasileira dedicada à produção e distribuição de bebidas, entre as quais cervejas, refrigerantes, energéticos, sucos, chás e água. A empresa esta presente em países das Américas e 30 marcas de bebidas, dentre elas Skol, Brahma, Stella Artois e Budweiser. Apenas no Brasil a empresa dispõe de 32 cervejarias e 2 maltarias."
+        },
+        {
+            "ticker": "CVCB",
+            "name": "CVC",
+            "sector": "Setor",
+            "subsector": "Sub-setor",
+            "segment": "Segmento",
+            "description": "A Ambev é uma empresa brasileira dedicada à produção e distribuição de bebidas, entre as quais cervejas, refrigerantes, energéticos, sucos, chás e água. A empresa esta presente em países das Américas e 30 marcas de bebidas, dentre elas Skol, Brahma, Stella Artois e Budweiser. Apenas no Brasil a empresa dispõe de 32 cervejarias e 2 maltarias."
+        },
+        {
+            "ticker": "EGIE",
+            "name": "ENGIE",
+            "sector": "Setor",
+            "subsector": "Sub-setor",
+            "segment": "Segmento",
+            "description": "A Ambev é uma empresa brasileira dedicada à produção e distribuição de bebidas, entre as quais cervejas, refrigerantes, energéticos, sucos, chás e água. A empresa esta presente em países das Américas e 30 marcas de bebidas, dentre elas Skol, Brahma, Stella Artois e Budweiser. Apenas no Brasil a empresa dispõe de 32 cervejarias e 2 maltarias."
+        },
+        {
+            "ticker": "ENBR",
+            "name": "Energias do Brasil",
+            "sector": "Setor",
+            "subsector": "Sub-setor",
+            "segment": "Segmento",
+            "description": "A Ambev é uma empresa brasileira dedicada à produção e distribuição de bebidas, entre as quais cervejas, refrigerantes, energéticos, sucos, chás e água. A empresa esta presente em países das Américas e 30 marcas de bebidas, dentre elas Skol, Brahma, Stella Artois e Budweiser. Apenas no Brasil a empresa dispõe de 32 cervejarias e 2 maltarias."
+        },
+        {
+            "ticker": "EZTC",
+            "name": "Ezetec",
+            "sector": "Setor",
+            "subsector": "Sub-setor",
+            "segment": "Segmento",
+            "description": "A Ambev é uma empresa brasileira dedicada à produção e distribuição de bebidas, entre as quais cervejas, refrigerantes, energéticos, sucos, chás e água. A empresa esta presente em países das Américas e 30 marcas de bebidas, dentre elas Skol, Brahma, Stella Artois e Budweiser. Apenas no Brasil a empresa dispõe de 32 cervejarias e 2 maltarias."
+        },
+        {
+            "ticker": "FLRY",
+            "name": "Fleury",
+            "sector": "Setor",
+            "subsector": "Sub-setor",
+            "segment": "Segmento",
+            "description": "A Ambev é uma empresa brasileira dedicada à produção e distribuição de bebidas, entre as quais cervejas, refrigerantes, energéticos, sucos, chás e água. A empresa esta presente em países das Américas e 30 marcas de bebidas, dentre elas Skol, Brahma, Stella Artois e Budweiser. Apenas no Brasil a empresa dispõe de 32 cervejarias e 2 maltarias."
+        },
+        {
+            "ticker": "GRND",
+            "name": "Grendene",
+            "sector": "Setor",
+            "subsector": "Sub-setor",
+            "segment": "Segmento",
+            "description": "A Ambev é uma empresa brasileira dedicada à produção e distribuição de bebidas, entre as quais cervejas, refrigerantes, energéticos, sucos, chás e água. A empresa esta presente em países das Américas e 30 marcas de bebidas, dentre elas Skol, Brahma, Stella Artois e Budweiser. Apenas no Brasil a empresa dispõe de 32 cervejarias e 2 maltarias."
+        },
+        {
+            "ticker": "GUAR",
+            "name": "Guararapes",
+            "sector": "Setor",
+            "subsector": "Sub-setor",
+            "segment": "Segmento",
+            "description": "A Ambev é uma empresa brasileira dedicada à produção e distribuição de bebidas, entre as quais cervejas, refrigerantes, energéticos, sucos, chás e água. A empresa esta presente em países das Américas e 30 marcas de bebidas, dentre elas Skol, Brahma, Stella Artois e Budweiser. Apenas no Brasil a empresa dispõe de 32 cervejarias e 2 maltarias."
+        }
+        ,
+        {
+            "ticker": "HGTX",
+            "name": "Hering",
+            "sector": "Setor",
+            "subsector": "Sub-setor",
+            "segment": "Segmento",
+            "description": "A Ambev é uma empresa brasileira dedicada à produção e distribuição de bebidas, entre as quais cervejas, refrigerantes, energéticos, sucos, chás e água. A empresa esta presente em países das Américas e 30 marcas de bebidas, dentre elas Skol, Brahma, Stella Artois e Budweiser. Apenas no Brasil a empresa dispõe de 32 cervejarias e 2 maltarias."
         }
     ]        
 

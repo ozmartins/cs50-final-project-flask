@@ -115,11 +115,19 @@ label {
   padding-left: 10px;
 }
 
+.company-info {
+  flex: 1;
+}
+
+.company-description {
+  flex: 8;
+}
+
 .company-name {
   font-weight: bold;
 
 }
 
-.company-classification {
+.company-group .company-subgroup .company-segment{
   color: gray;
 }
