@@ -82,6 +82,39 @@ def get_filters():
     return filters
 
 def get_stock_list():
-    stock_list = ["ABEV", "B3SA", "BBAS", "BBDC", "CIEL", "COGN", "CVCB", "EGIE", "ENBR"]
+    stock_list = [
+        {
+            "ticker": "ABEV",
+            "name": "AMBEV",
+            "sector": "Setor",
+            "subsector": "Sub-setor",
+            "segment": "Segment",
+            "description": "Faz cervejas e bebidas e afins. Faz cervejas e bebidas e afins. Faz cervejas e bebidas e afins. Faz cervejas e bebidas e afins. Faz cervejas e bebidas e afins."
+        },
+        {
+            "ticker": "B3SA",
+            "name": "B3",
+            "sector": "Setor",
+            "subsector": "Sub-setor",
+            "segment": "Segmento",
+            "description": "Intermedia a venda de ações e outros ativos. Intermedia a venda de ações e outros ativos. Intermedia a venda de ações e outros ativos. Intermedia a venda de ações e outros ativos."
+        },
+        {
+            "ticker": "BBAS",
+            "name": "Banco do Brasil",
+            "sector": "Setor",
+            "subsector": "Sub-setor",
+            "segment": "Segmento",
+            "description": "Banco mais antigo do Brasil. Banco mais antigo do Brasil. Banco mais antigo do Brasil. Banco mais antigo do Brasil. Banco mais antigo do Brasil. Banco mais antigo do Brasil. "
+        },
+        {
+            "ticker": "BBDC",
+            "name": "Bradesco",
+            "sector": "Setor",
+            "subsector": "Sub-setor",
+            "segment": "Segmento",
+            "description": "Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. Bancão. "
+        }
+    ]        
 
     return stock_list

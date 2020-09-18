@@ -19,7 +19,7 @@
 </div>
 
 <div class="stocks">
-    <div class="column left-side">
+    <div class="column filters">
         {% for item in filters %}
         <div>
             <div><p class="filter-group">{{item["description"]}}</p></div>
@@ -31,12 +31,12 @@
         </div>
         {% endfor %}
     </div>
-    <div class="column center">
+    <div class="column stock-grid">
         {% for item in stock_list %}
           <div class="card">
-              <img src="/static/companies-logo/{{item}}.gif" class="card-img-top" alt="...">
+              <img src="/static/companies-logo/{{item["ticker"]}}.gif" class="card-img-top" alt="...">
               <div class="card-body">
-                <h5 class="card-title">{{item}}</h5>
+                <h5 class="card-title">{{item["name"]}}</h5>
               </div>
           </div>
         {% endfor %}

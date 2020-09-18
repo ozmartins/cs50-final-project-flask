@@ -34,22 +34,42 @@ label {
   float: left;  
 }
 
-.column.left-side {
+.column.filters {
   width: 15%;    
   padding-top: 20px;
   padding-left: 20px;
 }
 
-.column.center {
+.stocks {  
+  background-color: #eee;
+}
+
+.filters {  
+  background-color:white;
+}
+
+.stock-grid {
   width: 85%;
   background-color: #eee;
   padding-bottom: 10px;
 }
 
-.column.center img{
+.stock-list {
+  width: 85%;
+  background-color: #eee;
+  padding-bottom: 10px;
+}
+
+.stock-grid img{
   margin-bottom: 5px;
   width: 190px;
   height: 190px;
+}
+
+.stock-list img{
+  margin-bottom: 5px;
+  width: 100px;
+  height: 100px;
 }
 
 .stocks:after {
@@ -81,4 +101,25 @@ label {
   height: 30px;;
   padding: 0;  
   text-align: center;
+}
+
+.stock-list-item {
+  display: flex;
+  background-color: white;
+  margin: 10px;
+  padding: 5px;
+}
+
+.stock-list-item p{
+  margin: 0;
+  padding-left: 10px;
+}
+
+.company-name {
+  font-weight: bold;
+
+}
+
+.company-classification {
+  color: gray;
 }
