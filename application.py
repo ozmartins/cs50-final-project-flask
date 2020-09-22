@@ -39,12 +39,19 @@ def index():
     return render_template("index.html", indicators=get_market_indicators(), news=get_market_news())
 
 
-@app.route("/stocks/<view>")
-def stocks(view=""):
-    if (view=="grid"):
-        return render_template("stocks-grid.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list())
-    else:
-        return render_template("stocks-list.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list())
+@app.route("/stocks-grid")
+def stocks_grid():
+    return render_template("stocks-grid.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list())    
+
+
+@app.route("/stocks-list")
+def stocks_list():
+    return render_template("stocks-list.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list())
+
+
+@app.route("/stock/<symbol>")
+def stock(symbol=""):
+    return render_template("stock.html")
 
 
 def errorhandler(e):    
