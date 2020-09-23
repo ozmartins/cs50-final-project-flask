@@ -7,24 +7,26 @@
 {% block main %}
 <div class="container">
   <h2 id="indicators-title">Indicadores</h2>
-  <div class="hbox row">
+  <div class="hbox row">    
     <div class="box ibovespa">
-      <div>
-        <div class="col">
-          <h2>IBOVESPA</h2>
-          <p>{{indicators["ibovespa"]["current"]}}</p>
+      <a href="/stocks-grid">
+        <div>
+          <div class="col">
+            <h2>IBOVESPA</h2>
+            <p>{{indicators["ibovespa"]["current"]}}</p>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col sub-indicator">
-          <h3>Min 52 semanas</h3>
-          <p>{{indicators["ibovespa"]["min52weeks"]}}</p>
-        </div>
-        <div class="col sub-indicator">
-          <h3>Max 52 semanas</h3>
-          <p>{{indicators["ibovespa"]["max52weeks"]}}</p>
-        </div>
-      </div>
+        <div class="row">
+          <div class="col sub-indicator">
+            <h3>Min 52 semanas</h3>
+            <p>{{indicators["ibovespa"]["min52weeks"]}}</p>
+          </div>
+          <div class="col sub-indicator">
+            <h3>Max 52 semanas</h3>
+            <p>{{indicators["ibovespa"]["max52weeks"]}}</p>
+          </div>
+        </div>        
+      </a>              
     </div>
     <div class="box">
       <div>

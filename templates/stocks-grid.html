@@ -32,12 +32,14 @@
         {% endfor %}
     </div>
     <div class="column stock-grid">
-        {% for item in stock_list %}
-          <div class="card">
-              <img src="/static/companies-logo/{{item["ticker"]}}.gif" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">{{item["name"]}}</h5>
-              </div>
+        {% for item in stock_list %}            
+            <div class="card">
+                <a href="/stock/{{item["ticker"]}}">
+                    <img src="/static/companies-logo/{{item["ticker"]}}.gif" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{item["name"]}}</h5>
+                    </div>
+                </a>
           </div>
         {% endfor %}
     </div>

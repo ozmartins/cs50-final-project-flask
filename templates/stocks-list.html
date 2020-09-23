@@ -33,16 +33,18 @@
     </div>
     <div class="column stock-list">
         {% for item in stock_list %}
-          <div class="stock-list-item">
-            <img src="/static/companies-logo/{{item["ticker"]}}.gif" alt="..." class="company-logo">
-            <div class="company-info">
-                <p class="company-name">{{item["name"]}}</p>
-                <p class="company-group">{{item["sector"]}}</p>
-                <p class="company-subgroup">{{item["subsector"]}}</p>
-                <p class="company-segment">{{item["segment"]}}</p>
-            </div>              
-            <p class="company-description">{{item["description"]}}</p>              
-          </div>
+            <a href="/stock/{{item["ticker"]}}">  
+                <div class="stock-list-item">
+                    <img src="/static/companies-logo/{{item["ticker"]}}.gif" alt="..." class="company-logo">
+                    <div class="company-info">
+                        <p class="company-name">{{item["name"]}}</p>
+                        <p class="company-group">{{item["sector"]}}</p>
+                        <p class="company-subgroup">{{item["subsector"]}}</p>
+                        <p class="company-segment">{{item["segment"]}}</p>
+                    </div>              
+                    <p class="company-description">{{item["description"]}}</p>              
+                </div>
+            </a>
         {% endfor %}
     </div>
 </div>

@@ -131,3 +131,13 @@ label {
 .company-group .company-subgroup .company-segment{
   color: gray;
 }
+
+a {
+  text-decoration: none;
+  color: #555;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #555;
+}

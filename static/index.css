@@ -131,3 +131,11 @@ p, h2, h3 {
 .ibovespa p, .ibovespa h1, .ibovespa h2, .ibovespa h3 {
   color: white;
 }
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
