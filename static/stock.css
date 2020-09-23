@@ -3,12 +3,16 @@ html {
   font-family: Arial, Helvetica, sans-serif;  
 }
 
-label {
-  padding-left: 10px;
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: inherit;
+}
+
+.container {
+  width: 780px;  
+  margin: auto;
+  background-color: #eee;  
+  padding-bottom: 20px;
+  margin-top: 10px;
 }
