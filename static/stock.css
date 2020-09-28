@@ -9,10 +9,65 @@ html {
   box-sizing: inherit;
 }
 
-.container {
-  width: 780px;  
+.container {  
   margin: auto;
   background-color: #eee;  
   padding-bottom: 20px;
   margin-top: 10px;
+}
+
+.company-name {
+  font-weight: bold;
+}
+
+.stock-header {  
+  padding-top: 10px;
+}
+
+.stock-header img {  
+  padding-right: 20px;
+}
+
+.stock-header-column-1 {
+  flex: 1;
+}
+
+.stock-header-column-2 {
+  flex: 2;
+}
+
+.stock-header-column-3 {
+  flex: 3;
+}
+
+.stock-header-column-4 {
+  flex: 4;
+}
+
+.stock-header-column-5 {
+  flex: 5;
+}
+
+.flex {
+  display: flex;
+}
+
+.block {
+  display: block;
+}
+
+.img-container {
+  width: 200px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.img-container img {
+  display: block;
+  width: 100%;  
+}
+
+.stock-header p {
+  padding: 0px;
+  margin: 0px;
 }
