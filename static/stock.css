@@ -16,48 +16,18 @@ html {
   margin-top: 10px;
 }
 
-.company-name {
-  font-weight: bold;
-}
-
 .stock-header {  
   padding-top: 10px;
-}
-
-.stock-header img {  
-  padding-right: 20px;
-}
-
-.stock-header-column-1 {
-  flex: 1;
-}
-
-.stock-header-column-2 {
-  flex: 2;
-}
-
-.stock-header-column-3 {
-  flex: 3;
-}
-
-.stock-header-column-4 {
-  flex: 4;
-}
-
-.stock-header-column-5 {
-  flex: 5;
-}
-
-.flex {
   display: flex;
 }
 
-.block {
-  display: block;
+.stock-header p {
+  padding: 0px;
+  margin: 0px;
 }
 
 .img-container {
-  width: 200px;
+  width: 140px;
   flex-shrink: 0;
   overflow: hidden;
 }
@@ -65,9 +35,29 @@ html {
 .img-container img {
   display: block;
   width: 100%;  
+  padding-right: 20px;
 }
 
-.stock-header p {
-  padding: 0px;
-  margin: 0px;
+.company-data {
+  display: block;
+}
+
+.company-name {
+  font-weight: bold;
+}
+
+.company-data-columns {
+  display: inline-block;
+}
+
+.company-data-col {
+  float: left;  
+  margin-right: 30px;
+  margin-bottom: 10px;
+}
+
+.float-left {
+  float: left;
+  margin-right: 30px;
+  margin-bottom: 10px;
 }
