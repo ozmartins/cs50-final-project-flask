@@ -1,6 +1,6 @@
 html {
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;  
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 * {
@@ -9,16 +9,15 @@ html {
   box-sizing: inherit;
 }
 
-.container {  
+.container {
   margin: auto;
-  background-color: #eee;  
-  padding-bottom: 20px;
-  margin-top: 10px;
+  background-color: #eee;    
 }
 
 .stock-header {  
-  padding-top: 10px;
   display: flex;
+  background-color: white;
+  padding-top: 10px;  
 }
 
 .stock-header p {
@@ -35,7 +34,8 @@ html {
 .img-container img {
   display: block;
   width: 100%;  
-  padding-right: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .company-data {
@@ -51,12 +51,6 @@ html {
 }
 
 .company-data-col {
-  float: left;  
-  margin-right: 30px;
-  margin-bottom: 10px;
-}
-
-.float-left {
   float: left;
   margin-right: 30px;
   margin-bottom: 10px;
