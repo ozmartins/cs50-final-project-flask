@@ -55,3 +55,8 @@ html {
   margin-right: 30px;
   margin-bottom: 10px;
 }
+
+.chart {
+  margin-top: 10px;  
+  background-color: white;
+}

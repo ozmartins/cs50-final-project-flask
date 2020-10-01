@@ -3,6 +3,7 @@
 {% block style %}
 <link rel="stylesheet" href="/static/stock.css">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="/static/stock.js"></script>
 {% endblock %}
 
 {% block main %}
@@ -36,34 +37,47 @@
             </div>            
         </div>        
     </div>
-    <div id="piechart"></div>
+    <div id="chart" class="chart">
+
+    </div>
 </div>
 
 <script type="text/javascript">
     selectTab("stocks-tab");
-
-    // Load google charts
+    
+    // Load the Visualization API and the corechart package.
     google.charts.load('current', {'packages':['corechart']});
+
+    // Set a callback to run when the Google Visualization API is loaded.
     google.charts.setOnLoadCallback(drawChart);
-    
-    // Draw the chart and set the chart values
+
+    // Callback that creates and populates a data table,
+    // instantiates the pie chart, passes in the data and
+    // draws it.
     function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['Work', 8],
-      ['Friends', 2],
-      ['Eat', 2],
-      ['TV', 2],
-      ['Gym', 2],
-      ['Sleep', 8]
-    ]);
-    
-      // Optional; add a title and set the width and height of the chart
-      var options = {'title':'My Average Day', 'width':550, 'height':400};
-    
-      // Display the chart inside the <div> element with id="piechart"
-      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-      chart.draw(data, options);
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Ano');
+        data.addColumn('number', 'Receita');
+        data.addColumn('number', 'EBITDA');
+        data.addColumn('number', 'Lucro líquido');
+        data.addRows([
+          ['2015', 150, 50, 25],
+          ['2016', 175, 50, 25],
+          ['2017', 200, 50, 25],
+          ['2018', 225, 50, 25],
+          ['2019', 250, 50, 25]
+        ]);
+
+        // Set chart options
+        var options = {'title':'DRE'
+                       //'width':400,
+                       //'height':300
+                    };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.ColumnChart (document.getElementById('chart'));
+        chart.draw(data, options);
     }
-    </script>
+</script>
 {% endblock %}
