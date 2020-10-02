@@ -42,6 +42,13 @@ function drawChart() {
                 };
 
     // Instantiate and draw our chart, passing in some options.
-    var chart = new google.visualization.ColumnChart (document.getElementById('chart'));
-    chart.draw(data, options);
+    var dre = new google.visualization.ColumnChart (document.getElementById('dre'));
+    var balanco = new google.visualization.ColumnChart (document.getElementById('balanco'));
+    var dfc = new google.visualization.ColumnChart (document.getElementById('dfc'));
+    var indicadores = new google.visualization.ColumnChart (document.getElementById('indicadores'));
+
+    dre.draw(data, options);
+    balanco.draw(data, options);
+    dfc.draw(data, options);
+    indicadores.draw(data, options);
 }
