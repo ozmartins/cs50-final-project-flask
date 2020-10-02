@@ -56,7 +56,19 @@ html {
   margin-bottom: 10px;
 }
 
-.chart {
+.chart-container {
   margin-top: 10px;  
   background-color: white;
+}
+
+.button-bar {
+  padding: 10px;
+}
+
+.chart-header div{
+  display: inline-block;  
+}
+
+.icons-bar {
+  float: right; 
 }
