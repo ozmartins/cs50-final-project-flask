@@ -1,4 +1,10 @@
+import sqlite3
+
 def get_market_indicators():
+    conn = sqlite3.connect('example.db')
+    c = conn.cursor('./db/cs50.db')
+    c.execute('select * from indicators')
+
     ibovespa = {
             "current": "102.000",
             "min52weeks": "65.000",
