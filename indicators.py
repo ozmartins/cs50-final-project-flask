@@ -1,38 +1,44 @@
 import sqlite3
 
 def get_market_indicators():
-    conn = sqlite3.connect('example.db')
-    c = conn.cursor('./db/cs50.db')
-    c.execute('select * from indicators')
+    conn = sqlite3.connect('./db/cs50.db')
+    c = conn.cursor()
+    c.execute("""select IbovespaCurrent, IbovespaMin52Weeks, IbovespaMax52Weeks,
+              IfixAtual, IfixMin52Weeks, IfixMax52Week,
+              Selic12Months, SelicCurrentMonth, SelicMonthName,
+              CDI12Months, CDIMesCurrent, CDIMonthName,
+              IPCA12Months, IPCACurrentMonth, IPCAMonthName
+              from indicators""")
+    rows = c.fetchall()
 
     ibovespa = {
-            "current": "102.000",
-            "min52weeks": "65.000",
-            "max52weeks": "120.000"
+            "current": '{:d}'.format(rows[0][0]),
+            "min52weeks": '{:d}'.format(rows[0][1]),
+            "max52weeks": '{:d}'.format(rows[0][2])
         }
 
     ifix = {
-            "current": "2.000",
-            "min52weeks": "1.000",
-            "max52weeks": "3.000"
+            "current": '{:d}'.format(rows[0][3]),
+            "min52weeks": '{:d}'.format(rows[0][4]),
+            "max52weeks": '{:d}'.format(rows[0][5])
         }
 
     selic = {
-            "yearrate": "3%",
-            "monthrate": "0.2%",
-            "monthname": "Agosto/2020"
+            "yearrate": '{:.2f}%'.format(rows[0][6]),
+            "monthrate": '{:.2f}%'.format(rows[0][7]),
+            "monthname": rows[0][8]
         }
 
     cdi = {
-            "yearrate": "2.9%",
-            "monthrate": "0.19%",
-            "monthname": "Agosto/2020"
+            "yearrate": '{:.2f}%'.format(rows[0][9]),
+            "monthrate": '{:.2f}%'.format(rows[0][10]),
+            "monthname": rows[0][11]
         }
 
     ipca = {
-            "yearrate": "2%",
-            "monthrate": "0.1%",
-            "monthname": "Agosto/2020"
+            "yearrate": '{:.2f}%'.format(rows[0][12]),
+            "monthrate": '{:.2f}%'.format(rows[0][13]),
+            "monthname": rows[0][14]
         }
 
     indicators = {

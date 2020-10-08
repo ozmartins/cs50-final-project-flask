@@ -35,7 +35,7 @@ Session(app)
 
 
 @app.route("/")
-def index():              
+def index():
     return render_template("index.html", indicators=get_market_indicators(), news=get_market_news())
 
 
