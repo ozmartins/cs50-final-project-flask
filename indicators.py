@@ -1,4 +1,5 @@
 import sqlite3
+import locale
 
 def get_market_indicators():
     conn = sqlite3.connect('./db/cs50.db')
@@ -11,33 +12,35 @@ def get_market_indicators():
               from indicators""")
     rows = c.fetchall()
 
+    locale.setlocale(locale.LC_ALL, 'pt')  # Use '' for auto, or force e.g. to 'en_US.UTF-8'    
+
     ibovespa = {
-            "current": '{:d}'.format(rows[0][0]),
-            "min52weeks": '{:d}'.format(rows[0][1]),
-            "max52weeks": '{:d}'.format(rows[0][2])
+            "current": '{:n}'.format(rows[0][0]),
+            "min52weeks": '{:n}'.format(rows[0][1]),
+            "max52weeks": '{:n}'.format(rows[0][2])
         }
 
     ifix = {
-            "current": '{:d}'.format(rows[0][3]),
-            "min52weeks": '{:d}'.format(rows[0][4]),
-            "max52weeks": '{:d}'.format(rows[0][5])
+            "current": '{:n}'.format(rows[0][3]),
+            "min52weeks": '{:n}'.format(rows[0][4]),
+            "max52weeks": '{:n}'.format(rows[0][5])
         }
 
     selic = {
-            "yearrate": '{:.2f}%'.format(rows[0][6]),
-            "monthrate": '{:.2f}%'.format(rows[0][7]),
+            "yearrate": '{:.2f}%'.format(rows[0][6]).replace('.', ','),
+            "monthrate": '{:.2f}%'.format(rows[0][7]).replace('.', ','),
             "monthname": rows[0][8]
         }
 
     cdi = {
-            "yearrate": '{:.2f}%'.format(rows[0][9]),
-            "monthrate": '{:.2f}%'.format(rows[0][10]),
+            "yearrate": '{:.2f}%'.format(rows[0][9]).replace('.', ','),
+            "monthrate": '{:.2f}%'.format(rows[0][10]).replace('.', ','),
             "monthname": rows[0][11]
         }
 
     ipca = {
-            "yearrate": '{:.2f}%'.format(rows[0][12]),
-            "monthrate": '{:.2f}%'.format(rows[0][13]),
+            "yearrate": '{:.2f}%'.format(rows[0][12]).replace('.', ','),
+            "monthrate": '{:.2f}%'.format(rows[0][13]).replace('.', ','),
             "monthname": rows[0][14]
         }
 
