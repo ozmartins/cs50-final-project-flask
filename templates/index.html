@@ -108,13 +108,13 @@
     {% for item in news%}
     <article class="hbox news">
       <div class="side img-container">
-        <img src="{{item["image"]}}" alt="">
+        <img src="{{item["urltoimage"]}}" alt="">
       </div>
       <div class="content">
         <header class="header">
-          <h3 class="titulo">{{item["headline"]}}</h3>
+          <h3 class="titulo">{{item["title"]}}</h3>
         </header>
-        <p>{{item["text"]}}</p>
+        <p>{{item["description"]}}</p>
       </div>
     </article>
     {%endfor%}

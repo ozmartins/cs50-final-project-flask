@@ -55,17 +55,20 @@ def get_market_indicators():
     return indicators
 
 def get_market_news():
-    news = [
-        {
-            "image": "./static/nova-previdencia-privada.jpg",
-            "headline": "Manchete da primeira notícia",
-            "text": "Texto da primeira notícia"
-        },
-        {
-            "image": "./static/money-times.png",
-            "headline": "Manchete da segunda notícia",
-            "text": "Texto da segunda notícia"
-        },        
-    ]
+    conn = sqlite3.connect('./db/cs50.db')
+    c = conn.cursor()
+    c.execute("select urltoimage, title, description, url from news")
+    rows = c.fetchall()
+    news = []
+
+    for r in rows:
+        news.append(
+            {
+                "urltoimage": r[0],
+                "title": r[1],
+                "description": r[2],
+                "url": r[3]
+            }        
+        )
 
     return news
