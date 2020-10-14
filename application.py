@@ -60,6 +60,21 @@ def errorhandler(e):
     return apology(e.name, e.code)
 
 
+@app.route("/admin")
+def admin():    
+    return render_template("admin.html")
+
+
+@app.route("/indicators/update")
+def update_indicators():    
+    return redirect("/admin")
+
+
+@app.route("/news/update")
+def update_news():    
+    return redirect("/admin")
+
+
 # Listen for errors
 for code in default_exceptions:
     app.errorhandler(code)(errorhandler)
