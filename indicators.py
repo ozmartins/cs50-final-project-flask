@@ -9,7 +9,8 @@ def get_market_indicators():
               Selic12Months, SelicCurrentMonth, SelicMonthName,
               CDI12Months, CDIMesCurrent, CDIMonthName,
               IPCA12Months, IPCACurrentMonth, IPCAMonthName
-              from indicators""")
+              from indicators
+              where Id = 1""")
     rows = c.fetchall()
 
     locale.setlocale(locale.LC_ALL, 'pt')  # Use '' for auto, or force e.g. to 'en_US.UTF-8'    

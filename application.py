@@ -10,6 +10,7 @@ from datetime import datetime
 from helpers import apology
 from indicators import get_market_indicators, get_market_news
 from stocks import get_orderby_criterias, get_filters, get_stock_list
+from admin import update_ibovespa
 
 
 # Configure application
@@ -60,19 +61,13 @@ def errorhandler(e):
     return apology(e.name, e.code)
 
 
-@app.route("/admin")
-def admin():    
-    return render_template("admin.html")
-
-
-@app.route("/indicators/update")
-def update_indicators():    
-    return redirect("/admin")
-
-
-@app.route("/news/update")
-def update_news():    
-    return redirect("/admin")
+@app.route("/admin", methods=["GET", "POST"])
+def admin():
+    if request.method=="GET":
+        return render_template("admin.html")
+    elif request.method=="POST":        
+        update_ibovespa()
+        return redirect("/admin")
 
 
 # Listen for errors
