@@ -4,10 +4,7 @@
 {% endblock %}
 
 {% block main %}
-<form action="/admin">
-  <button type="submit">Atualizar IBOVESPA</button>
-  <button type="submit">Atualizar IFIX</button>
-  <button type="submit">Atualizar CDI, SELIC e IPCA</button>
-  <button type="submit">Atualizar notícias</button>
+<form action="/admin" method="POST">
+  <button type="submit">Atualizar IBOVESPA</button>  
 </form>
 {% endblock %}
