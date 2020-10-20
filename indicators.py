@@ -5,14 +5,14 @@ def get_market_indicators():
     conn = sqlite3.connect('./db/cs50.db')
     c = conn.cursor()
     c.execute("""select IbovespaCurrent, IbovespaMin52Weeks, IbovespaMax52Weeks,
-              IfixAtual, IfixMin52Weeks, IfixMax52Week,
+              IfixCurrent, IfixMin52Weeks, IfixMax52Weeks,
               Selic12Months, SelicCurrentMonth, SelicMonthName,
               CDI12Months, CDIMesCurrent, CDIMonthName,
               IPCA12Months, IPCACurrentMonth, IPCAMonthName
               from indicators
               where Id = 1""")
     rows = c.fetchall()
-
+    
     locale.setlocale(locale.LC_ALL, 'pt')  # Use '' for auto, or force e.g. to 'en_US.UTF-8'    
 
     ibovespa = {
