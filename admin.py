@@ -11,21 +11,29 @@ def create_indicators_record():
         c.execute("insert into indicators (Id) values (1)")    
         conn.commit()
 
-def get_headers():
+
+def get_yahoo_headers():
     return {
         'x-rapidapi-host': "apidojo-yahoo-finance-v1.p.rapidapi.com",
         'x-rapidapi-key': "b86840a0f4mshd0750b5555ff72cp1653d3jsn06f167d0fd64"
         }
 
 
-def update_ibovespa():
-    import requests
+def get_google_params():
+    return {        
+        'apiKey': 'cdeadf494b5e4fd48b31a9900ad9a6b5',
+        'sortBy': 'popularity',
+        'q': 'ibovespa',
+        'from': '2020-10-20'
+        }        
 
+
+def update_ibovespa():    
     url = "https://rapidapi.p.rapidapi.com/market/v2/get-quotes"
 
     querystring = {"symbols":"^BVSP","region":"BR"}    
 
-    response = requests.request("GET", url, headers=get_headers(), params=querystring)
+    response = requests.request("GET", url, headers=get_yahoo_headers(), params=querystring)
 
     resp = response.json()
 
@@ -44,14 +52,12 @@ def update_ibovespa():
     
     conn.commit()
 
-def update_ifix():
-    import requests
-
+def update_ifix():    
     url = "https://rapidapi.p.rapidapi.com/market/v2/get-quotes"
 
     querystring = {"symbols":"IFIX.SA","region":"BR"}
 
-    response = requests.request("GET", url, headers=get_headers(), params=querystring)
+    response = requests.request("GET", url, headers=get_yahoo_headers(), params=querystring)
 
     resp = response.json()
 
@@ -70,5 +76,28 @@ def update_ifix():
     
     conn.commit()
 
-update_ibovespa()
-update_ifix()
+def update_news():
+    #cdeadf494b5e4fd48b31a9900ad9a6b5
+    url = "http://newsapi.org/v2/everything"
+
+    response = requests.request("GET", url, params=get_google_params())
+
+    resp = response.json()    
+
+    conn = sqlite3.connect('./db/cs50.db')
+
+    c = conn.cursor()
+
+    c.execute("delete from news")
+
+    id = 0    
+
+    for article in resp["articles"]:        
+        id += 1
+        c.execute("insert into news (id, title, description, url, urltoimage, publishedat) values (?, ?, ?, ?, ?, ?)", 
+           (id, article["title"], article["description"], article["url"], article["urlToImage"], article["publishedAt"])
+        )
+    
+    conn.commit()
+
+update_news()
