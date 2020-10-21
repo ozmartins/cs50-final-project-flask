@@ -1,7 +1,7 @@
 import sqlite3
 import requests
 from helpers import apology
-from datetime import date
+from datetime import date, datetime, timedelta
 
 def create_indicators_record():
     conn = sqlite3.connect('./db/cs50.db')
@@ -101,4 +101,34 @@ def update_news():
     
     conn.commit()
 
-update_news()
+def update_selic():
+    #https://api.bcb.gov.br/dados/serie/bcdata.sgs.11/dados?formato=json&dataInicial=21/10/2019&dataFinal=21/10/2020
+
+    url = "https://api.bcb.gov.br/dados/serie/bcdata.sgs.11/dados"
+
+    today = datetime.now()
+    one_year_ago = datetime.now() - timedelta(days=365)
+
+    querystring = {
+            "formato":"json",
+            "dataInicial": one_year_ago.strftime("%d/%m/%Y"),
+            "dataFinal": today.strftime("%d/%m/%Y")
+        }
+
+    response = requests.request("GET", url, params=querystring)
+
+    resp = response.json()
+
+    conn = sqlite3.connect('./db/cs50.db')
+
+    c = conn.cursor()
+
+    c.execute("delete from selic")
+
+    for selic in resp:
+        c.execute("insert into selic (date, value) values (?, ?)", (selic["data"], selic["valor"]))
+    
+    conn.commit()
+
+update_ibovespa()
+update_ifix()
