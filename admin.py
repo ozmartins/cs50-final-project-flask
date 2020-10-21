@@ -1,6 +1,7 @@
 import sqlite3
 import requests
 from helpers import apology
+from datetime import date
 
 def create_indicators_record():
     conn = sqlite3.connect('./db/cs50.db')
@@ -24,7 +25,7 @@ def get_google_params():
         'apiKey': 'cdeadf494b5e4fd48b31a9900ad9a6b5',
         'sortBy': 'popularity',
         'q': 'ibovespa',
-        'from': '2020-10-20'
+        'from': date.today().strftime("%Y-%m-%d")
         }        
 
 
