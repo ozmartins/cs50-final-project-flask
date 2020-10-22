@@ -24,7 +24,7 @@ def get_google_params():
     return {        
         'apiKey': 'cdeadf494b5e4fd48b31a9900ad9a6b5',
         'sortBy': 'popularity',
-        'q': 'ibovespa',
+        'q': 'ibovespa AND hoje',
         'from': date.today().strftime("%Y-%m-%d")
         }        
 
@@ -127,8 +127,13 @@ def update_selic():
 
     for selic in resp:
         c.execute("insert into selic (date, value) values (?, ?)", (selic["data"], selic["valor"]))
+
+    c.execute("""update indicators set 
+        Selic12Months = (select sum(value) from selic),
+        SelicLastMonth = (select sum(value) from selic where date >= ?),
+        SelicMonthName = ?""",
+        (one_year_ago, 'Setembro 2020'))
     
     conn.commit()
 
-update_ibovespa()
-update_ifix()
+update_selic()

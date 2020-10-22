@@ -1,19 +1,35 @@
 import sqlite3
-import locale
+import locale        
+from admin import create_indicators_record
 
 def get_market_indicators():
+    create_indicators_record()
+    
     conn = sqlite3.connect('./db/cs50.db')
-    c = conn.cursor()
-    c.execute("""select IbovespaCurrent, IbovespaMin52Weeks, IbovespaMax52Weeks,
-              IfixCurrent, IfixMin52Weeks, IfixMax52Weeks,
-              Selic12Months, SelicCurrentMonth, SelicMonthName,
-              CDI12Months, CDIMesCurrent, CDIMonthName,
-              IPCA12Months, IPCACurrentMonth, IPCAMonthName
+
+    c = conn.cursor()    
+    
+    c.execute("""select coalesce(IbovespaCurrent, 0),
+                        coalesce(IbovespaMin52Weeks, 0),
+                        coalesce(IbovespaMax52Weeks, 0),
+                        coalesce(IfixCurrent, 0),
+                        coalesce(IfixMin52Weeks, 0), 
+                        coalesce(IfixMax52Weeks, 0),
+                        coalesce(Selic12Months, 0),
+                        coalesce(SelicLastMonth, 0), 
+                        coalesce(SelicMonthName,' '),
+                        coalesce(CDI12Months, 0), 
+                        coalesce(CDILastMonth, 0), 
+                        coalesce(CDIMonthName, ' '),
+                        coalesce(IPCA12Months, 0), 
+                        coalesce(IPCALastMonth, 0), 
+                        coalesce(IPCAMonthName, ' ')
               from indicators
               where Id = 1""")
+    
     rows = c.fetchall()
     
-    locale.setlocale(locale.LC_ALL, 'pt')  # Use '' for auto, or force e.g. to 'en_US.UTF-8'    
+    locale.setlocale(locale.LC_ALL, 'pt')  # Use '' for auto, or force e.g. to 'en_US.UTF-8'
 
     ibovespa = {
             "current": '{:n}'.format(rows[0][0]),

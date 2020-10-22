@@ -78,6 +78,11 @@ p {
   margin-bottom: 20px;
 }
 
+.news {
+  text-decoration: none;
+  color:#47525b;
+}
+
 .row {
   margin: 10px 0;
 }

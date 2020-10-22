@@ -106,7 +106,7 @@
   <section class="news-list">
     <h2 id="news-list-title">Notícias</h2>
     {% for item in news%}
-    <article class="hbox news">
+    <a href="{{item["url"]}}" target="_blank" class="hbox news">
       <div class="side img-container">
         <img src="{{item["urltoimage"]}}" alt="">
       </div>
@@ -116,7 +116,7 @@
         </header>
         <p>{{item["description"]}}</p>
       </div>
-    </article>
+    </a>    
     {%endfor%}
   </section>
 </div>
