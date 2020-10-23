@@ -1,6 +1,6 @@
 import sqlite3
 import requests
-from helpers import apology
+from helpers import apology, last_month, month_name
 from datetime import date, datetime, timedelta
 
 def create_indicators_record():
@@ -106,8 +106,8 @@ def update_selic():
 
     url = "https://api.bcb.gov.br/dados/serie/bcdata.sgs.11/dados"
 
-    today = datetime.now()
-    one_year_ago = datetime.now() - timedelta(days=365)
+    today = datetime.today().date()
+    one_year_ago = datetime.today().date() - timedelta(days=365)    
 
     querystring = {
             "formato":"json",
@@ -126,13 +126,16 @@ def update_selic():
     c.execute("delete from selic")
 
     for selic in resp:
-        c.execute("insert into selic (date, value) values (?, ?)", (selic["data"], selic["valor"]))
+        date = datetime.strptime(selic["data"], '%d/%m/%Y').date()        
+        c.execute("insert into selic (date, value) values (?, ?)", (date, selic["valor"]))
 
+    print(last_month().strftime('%Y%m'))
+    
     c.execute("""update indicators set 
-        Selic12Months = (select sum(value) from selic),
-        SelicLastMonth = (select sum(value) from selic where date >= ?),
+        Selic12Months = (select sum(value) from selic where date >= ?),
+        SelicLastMonth = (select sum(value) from selic where strftime('%Y%m', date) = ?),
         SelicMonthName = ?""",
-        (one_year_ago, 'Setembro 2020'))
+        (one_year_ago, last_month().strftime('%Y%m'), month_name(last_month().month)))
     
     conn.commit()
 
