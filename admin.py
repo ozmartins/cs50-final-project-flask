@@ -171,8 +171,12 @@ def update_ipca():
     
     conn.commit()
 
-def update_cdi():
-    #https://web.postman.co/build/workspace/My-Workspace~42925b98-1fae-4148-8ccb-d5641110c8eb/history/3670336-5a0a758d-6743-4921-92d3-37602f7ca858
-    print('update CDI')
 
-update_ipca()
+def update_cdi():
+    cdi_file = open("C:\\Users\\oseias.silva\\Documents\\GitHub\\cs50-final-project-flask\\import\cdi.xls", "r")
+    yourResult = [line.split('\t') for line in cdi_file.readlines()]
+
+    print(yourResult)
+    
+
+update_cdi()
