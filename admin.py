@@ -128,8 +128,6 @@ def update_selic():
     for selic in resp:
         date = datetime.strptime(selic["data"], '%d/%m/%Y').date()        
         c.execute("insert into selic (date, value) values (?, ?)", (date, selic["valor"]))
-
-    print(last_month().strftime('%Y%m'))
     
     c.execute("""update indicators set 
         Selic12Months = (select sum(value) from selic where date >= ?),
@@ -139,4 +137,42 @@ def update_selic():
     
     conn.commit()
 
-update_selic()
+def update_ipca():
+    url = "https://api.bcb.gov.br/dados/serie/bcdata.sgs.16121/dados"
+
+    today = datetime.today().date()
+    one_year_ago = datetime.today().date() - timedelta(days=365)
+
+    querystring = {
+            "formato":"json",
+            "dataInicial": one_year_ago.strftime("%d/%m/%Y"),
+            "dataFinal": today.strftime("%d/%m/%Y")
+        }
+
+    response = requests.request("GET", url, params=querystring)
+
+    resp = response.json()
+
+    conn = sqlite3.connect('./db/cs50.db')
+
+    c = conn.cursor()
+
+    c.execute("delete from ipca")
+
+    for ipca in resp:
+        date = datetime.strptime(ipca["data"], '%d/%m/%Y').date()        
+        c.execute("insert into ipca (date, value) values (?, ?)", (date, ipca["valor"]))
+    
+    c.execute("""update indicators set 
+        Ipca12Months = (select sum(value) from ipca where date >= ?),
+        IpcaLastMonth = (select sum(value) from ipca where strftime('%Y%m', date) = ?),
+        IpcaMonthName = ?""",
+        (one_year_ago, last_month().strftime('%Y%m'), month_name(last_month().month)))
+    
+    conn.commit()
+
+def update_cdi():
+    #https://web.postman.co/build/workspace/My-Workspace~42925b98-1fae-4148-8ccb-d5641110c8eb/history/3670336-5a0a758d-6743-4921-92d3-37602f7ca858
+    print('update CDI')
+
+update_ipca()
