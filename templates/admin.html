@@ -4,7 +4,13 @@
 {% endblock %}
 
 {% block main %}
-<form action="/admin" method="POST">
-  <button type="submit">Atualizar IBOVESPA</button>  
+<form action="/admin" method="POST"> 
+  <input type="checkbox" name="ibovespa"/><label for="ibovespa">Ibovespa</label>
+  <input type="checkbox" name="ifix"/><label for="ifix">Ifix</label>
+  <input type="checkbox" name="selic"/><label for="selic">Selic</label>
+  <input type="checkbox" name="cdi"/><label for="cdi">CDI</label>
+  <input type="checkbox" name="ipca"/><label for="ipca">IPCA</label>
+  <input type="checkbox" name="news"/><label for="news">News</label>
+  <button type="submit">Atualizar</button>
 </form>
 {% endblock %}

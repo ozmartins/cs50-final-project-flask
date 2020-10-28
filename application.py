@@ -10,7 +10,7 @@ from datetime import datetime
 from helpers import apology
 from indicators import get_market_indicators, get_market_news
 from stocks import get_orderby_criterias, get_filters, get_stock_list
-from admin import update_ibovespa
+from admin import update_ibovespa, update_ifix, update_news, update_cdi, update_selic, update_ipca
 
 
 # Configure application
@@ -35,22 +35,22 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def index():
     return render_template("index.html", indicators=get_market_indicators(), news=get_market_news())
 
 
-@app.route("/stocks-grid")
+@app.route("/stocks-grid", methods=["GET"])
 def stocks_grid():
     return render_template("stocks-grid.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list())    
 
 
-@app.route("/stocks-list")
+@app.route("/stocks-list", methods=["GET"])
 def stocks_list():
     return render_template("stocks-list.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list())
 
 
-@app.route("/stock/<symbol>")
+@app.route("/stock/<symbol>", methods=["GET"])
 def stock(symbol=""):
     return render_template("stock.html")
 
@@ -63,11 +63,28 @@ def errorhandler(e):
 
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
-    if request.method=="GET":
-        return render_template("admin.html")
-    elif request.method=="POST":        
-        update_ibovespa()
-        return redirect("/admin")
+    if request.method == "GET":
+        return render_template("admin.html")    
+    elif request.method == "POST":
+        if request.form.get("ibovespa")=="on":
+            update_ibovespa()
+            print("ibovespa")
+        if request.form.get("ifix")=="on":
+            update_ifix()
+            print("ifix")
+        if request.form.get("selic")=="on":
+            update_selic()
+            print("selic")
+        if request.form.get("cdi")=="on":    
+            update_cdi()
+            print("cdi")
+        if request.form.get("ipca")=="on":
+            update_ipca()
+            print("ipca")
+        if request.form.get("news")=="on":
+            update_news()
+            print("news")
+        return redirect("/")   
 
 
 # Listen for errors
