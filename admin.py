@@ -173,10 +173,29 @@ def update_ipca():
 
 
 def update_cdi():
-    cdi_file = open("C:\\Users\\oseias.silva\\Documents\\GitHub\\cs50-final-project-flask\\import\cdi.xls", "r")
-    yourResult = [line.split('\t') for line in cdi_file.readlines()]
+    cdi_file = open("import\\cdi.xls", "r")
 
-    print(yourResult)
+    lines = [line.replace('\n', '').split('\t') for line in cdi_file.readlines()]
+    lines.pop(0)
+
+    conn = sqlite3.connect('./db/cs50.db')
+
+    c = conn.cursor()
+
+    c.execute("delete from cdi")
+
+    for line in lines:
+        date = datetime.strptime(line[0], '%d/%m/%Y').date()
+        c.execute("insert into cdi (date, value) values (?, ?)", (date, (float(line[4].replace('.', '').replace(',', '.'))-1) * 100) )
+
+    one_year_ago = datetime.today().date() - timedelta(days=365)
     
+    c.execute("""update indicators set 
+        Cdi12Months = (select sum(value) from cdi where date >= ?),
+        CdiLastMonth = (select sum(value) from cdi where strftime('%Y%m', date) = ?),
+        CdiMonthName = ?""",
+        (one_year_ago, last_month().strftime('%Y%m'), month_name(last_month().month)))
+    
+    conn.commit()
 
 update_cdi()
