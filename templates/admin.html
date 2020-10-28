@@ -1,16 +1,35 @@
 {% extends "layout.html" %}
 
 {% block style %}
+<link rel="stylesheet" href="./static/admin.css">
 {% endblock %}
 
 {% block main %}
-<form action="/admin" method="POST"> 
-  <input type="checkbox" name="ibovespa"/><label for="ibovespa">Ibovespa</label>
-  <input type="checkbox" name="ifix"/><label for="ifix">Ifix</label>
-  <input type="checkbox" name="selic"/><label for="selic">Selic</label>
-  <input type="checkbox" name="cdi"/><label for="cdi">CDI</label>
-  <input type="checkbox" name="ipca"/><label for="ipca">IPCA</label>
-  <input type="checkbox" name="news"/><label for="news">News</label>
-  <button type="submit">Atualizar</button>
+<form action="/admin" method="POST" class="admin-form"> 
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="ibovespa" name="ibovespa">
+    <label class="form-check-label" for="ibovespa">Ibovespa</label>
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="ifix" name="ifix">
+    <label class="form-check-label" for="ifix">IFIX</label>
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="selic" name="selic">
+    <label class="form-check-label" for="selic">Selic</label>
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="cdi" name="cdi">
+    <label class="form-check-label" for="cdi">CDI</label>
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="ipca" name="ipca">
+    <label class="form-check-label" for="ipca">IPCA</label>
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="news" name="news">
+    <label class="form-check-label" for="news">Notícias</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Atualizar</button>
 </form>
 {% endblock %}

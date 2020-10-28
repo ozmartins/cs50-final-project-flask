@@ -197,5 +197,3 @@ def update_cdi():
         (one_year_ago, last_month().strftime('%Y%m'), month_name(last_month().month)))
     
     conn.commit()
-
-update_cdi()
