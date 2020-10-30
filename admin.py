@@ -1,6 +1,6 @@
 import sqlite3
 import requests
-from helpers import apology, last_month, month_name
+from helpers import apology, last_month, month_name, last_day_of_month, first_day_of_month, one_year_ago
 from datetime import date, datetime, timedelta
 
 def create_indicators_record():
@@ -106,13 +106,13 @@ def update_selic():
 
     url = "https://api.bcb.gov.br/dados/serie/bcdata.sgs.11/dados"
 
-    today = datetime.today().date()
-    one_year_ago = datetime.today().date() - timedelta(days=365)    
+    initial_date = one_year_ago(first_day_of_month(datetime.today().date()))
+    final_date = last_day_of_month(last_month())
 
     querystring = {
             "formato":"json",
-            "dataInicial": one_year_ago.strftime("%d/%m/%Y"),
-            "dataFinal": today.strftime("%d/%m/%Y")
+            "dataInicial": initial_date.strftime("%d/%m/%Y"),
+            "dataFinal": final_date.strftime("%d/%m/%Y")
         }
 
     response = requests.request("GET", url, params=querystring)
@@ -130,23 +130,23 @@ def update_selic():
         c.execute("insert into selic (date, value) values (?, ?)", (date, selic["valor"]))
     
     c.execute("""update indicators set 
-        Selic12Months = (select sum(value) from selic where date >= ?),
+        Selic12Months = (select sum(value) from selic where date >= ? and date <= ?),
         SelicLastMonth = (select sum(value) from selic where strftime('%Y%m', date) = ?),
         SelicMonthName = ?""",
-        (one_year_ago, last_month().strftime('%Y%m'), month_name(last_month().month)))
+        (initial_date, final_date, last_month().strftime('%Y%m'), month_name(last_month().month)))
     
     conn.commit()
 
 def update_ipca():
     url = "https://api.bcb.gov.br/dados/serie/bcdata.sgs.16121/dados"
 
-    today = datetime.today().date()
-    one_year_ago = datetime.today().date() - timedelta(days=365)
+    initial_date = one_year_ago(first_day_of_month(datetime.today().date()))
+    final_date = last_day_of_month(last_month())
 
     querystring = {
             "formato":"json",
-            "dataInicial": one_year_ago.strftime("%d/%m/%Y"),
-            "dataFinal": today.strftime("%d/%m/%Y")
+            "dataInicial": initial_date.strftime("%d/%m/%Y"),
+            "dataFinal": final_date.strftime("%d/%m/%Y")
         }
 
     response = requests.request("GET", url, params=querystring)
@@ -164,10 +164,10 @@ def update_ipca():
         c.execute("insert into ipca (date, value) values (?, ?)", (date, ipca["valor"]))
     
     c.execute("""update indicators set 
-        Ipca12Months = (select sum(value) from ipca where date >= ?),
+        Ipca12Months = (select sum(value) from ipca where date >= ? and date <= ?),
         IpcaLastMonth = (select sum(value) from ipca where strftime('%Y%m', date) = ?),
         IpcaMonthName = ?""",
-        (one_year_ago, last_month().strftime('%Y%m'), month_name(last_month().month)))
+        (initial_date, final_date, last_month().strftime('%Y%m'), month_name(last_month().month)))
     
     conn.commit()
 
@@ -188,12 +188,17 @@ def update_cdi():
         date = datetime.strptime(line[0], '%d/%m/%Y').date()
         c.execute("insert into cdi (date, value) values (?, ?)", (date, (float(line[4].replace('.', '').replace(',', '.'))-1) * 100) )
 
-    one_year_ago = datetime.today().date() - timedelta(days=365)
+    initial_date = one_year_ago(first_day_of_month(datetime.today().date()))
+    final_date = last_day_of_month(last_month())
     
     c.execute("""update indicators set 
-        Cdi12Months = (select sum(value) from cdi where date >= ?),
+        Cdi12Months = (select sum(value) from cdi where date >= ? and date <= ?),
         CdiLastMonth = (select sum(value) from cdi where strftime('%Y%m', date) = ?),
         CdiMonthName = ?""",
-        (one_year_ago, last_month().strftime('%Y%m'), month_name(last_month().month)))
+        (initial_date, final_date, last_month().strftime('%Y%m'), month_name(last_month().month)))
     
     conn.commit()
+
+update_cdi()
+update_selic()
+update_ipca()    
