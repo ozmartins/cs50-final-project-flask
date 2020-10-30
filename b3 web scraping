@@ -1,0 +1,11 @@
+GET em: https://www.rad.cvm.gov.br/ENETCONSULTA/frmGerenciaPaginaFRE.aspx?NumeroSequencialDocumento=90955&CodigoTipoInstituicao=2
+
+localizar elemento cmbQuadro.
+
+percorrer opções do elemento cmbQuadro (cada opção tem o link de um demonstrativo).
+
+localizar window.frames[0].location e extrair o HASH.
+
+Usar os links do cmbQuadro junto com o HASH para abrir a página de cada demonstrativo.
+
+A página dos demonstrativo são tabelas simples. Então é só ler e ser feliz.
