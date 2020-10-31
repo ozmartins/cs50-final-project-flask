@@ -198,7 +198,3 @@ def update_cdi():
         (initial_date, final_date, last_month().strftime('%Y%m'), month_name(last_month().month)))
     
     conn.commit()
-
-update_cdi()
-update_selic()
-update_ipca()    
