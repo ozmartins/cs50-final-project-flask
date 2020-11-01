@@ -67,23 +67,17 @@ def admin():
         return render_template("admin.html")    
     elif request.method == "POST":
         if request.form.get("ibovespa")=="on":
-            update_ibovespa()
-            print("ibovespa")
+            update_ibovespa()        
         if request.form.get("ifix")=="on":
-            update_ifix()
-            print("ifix")
+            update_ifix()            
         if request.form.get("selic")=="on":
-            update_selic()
-            print("selic")
+            update_selic()            
         if request.form.get("cdi")=="on":    
-            update_cdi()
-            print("cdi")
+            update_cdi()            
         if request.form.get("ipca")=="on":
-            update_ipca()
-            print("ipca")
+            update_ipca()    
         if request.form.get("news")=="on":
-            update_news()
-            print("news")
+            update_news()            
         return redirect("/")   
 
 

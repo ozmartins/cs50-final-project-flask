@@ -30,7 +30,7 @@ def get_google_params():
 
 
 def update_ibovespa():    
-    url = "https://rapidapi.p.rapidapi.com/market/v2/get-quotes"
+    url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes"
 
     querystring = {"symbols":"^BVSP","region":"BR"}    
 
@@ -54,7 +54,7 @@ def update_ibovespa():
     conn.commit()
 
 def update_ifix():    
-    url = "https://rapidapi.p.rapidapi.com/market/v2/get-quotes"
+    url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes"
 
     querystring = {"symbols":"IFIX.SA","region":"BR"}
 
@@ -198,3 +198,90 @@ def update_cdi():
         (initial_date, final_date, last_month().strftime('%Y%m'), month_name(last_month().month)))
     
     conn.commit()
+
+
+def update_income_statement(history):
+    for year in history:
+        if len(year['researchDevelopment']) > 0:
+            researchDevelopment = year['researchDevelopment']['longFmt']
+
+        if len(year['effectOfAccountingCharges']) > 0:
+            effectOfAccountingCharges = year['effectOfAccountingCharges']['longFmt']
+
+        if len(year['incomeBeforeTax']) > 0:
+            incomeBeforeTax = year['incomeBeforeTax']['longFmt']
+        
+        if len(year['minorityInterest']) > 0:
+            minorityInterest = year['minorityInterest']['longFmt']
+        
+        if len(year['netIncome']) > 0:
+            netIncome = year['netIncome']['longFmt']
+        
+        if len(year['sellingGeneralAdministrative']) > 0:
+            sellingGeneralAdministrative = year['sellingGeneralAdministrative']['longFmt']
+        
+        if len(year['grossProfit']) > 0:
+            grossProfit = year['grossProfit']['longFmt']
+        
+        if len(year['ebit']) > 0:
+            ebit = year['ebit']['longFmt']
+        
+        if len(year['endDate']) > 0:
+            endDate = year['endDate']['fmt']
+        
+        if len(year['operatingIncome']) > 0:
+            operatingIncome = year['operatingIncome']['longFmt']
+        
+        if len(year['otherOperatingExpenses']) > 0:
+            otherOperatingExpenses = year['otherOperatingExpenses']['longFmt']
+        
+        if len(year['interestExpense']) > 0:
+            interestExpense = year['interestExpense']['longFmt']
+        
+        if len(year['extraordinaryItems']) > 0:
+            extraordinaryItems = year['extraordinaryItems']['longFmt']
+        
+        if len(year['nonRecurring']) > 0:
+            nonRecurring = year['nonRecurring']['longFmt']
+        
+        if len(year['otherItems']) > 0:
+            otherItems = year['otherItems']['longFmt']
+        
+        if len(year['incomeTaxExpense']) > 0:
+            incomeTaxExpense = year['incomeTaxExpense']['longFmt']
+        
+        if len(year['totalRevenue']) > 0:
+            totalRevenue = year['totalRevenue']['longFmt']
+        
+        if len(year['totalOperatingExpenses']) > 0:
+            totalOperatingExpenses = year['totalOperatingExpenses']['longFmt']
+        
+        if len(year['costOfRevenue']) > 0:
+            costOfRevenue = year['costOfRevenue']['longFmt']
+        
+        if len(year['totalOtherIncomeExpenseNet']) > 0:
+            totalOtherIncomeExpenseNet = year['totalOtherIncomeExpenseNet']['longFmt']
+        
+        if len(year['discontinuedOperations']) > 0:
+            discontinuedOperations = year['discontinuedOperations']['longFmt']
+        
+        if len(year['netIncomeFromContinuingOps']) > 0:
+            netIncomeFromContinuingOps = year['netIncomeFromContinuingOps']['longFmt']
+        
+        if len(year['netIncomeApplicableToCommonShares']) > 0:
+            netIncomeApplicableToCommonShares = year['netIncomeApplicableToCommonShares']['longFmt']
+
+
+def update_stock_data(stock):
+    url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-financials"
+
+    querystring = {"symbol":stock,"region":"BR"}    
+
+    response = requests.request("GET", url, headers=get_yahoo_headers(), params=querystring)
+
+    resp = response.json() 
+
+    update_income_statement(resp['incomeStatementHistory']['incomeStatementHistory'])
+
+
+update_stock_data("PETR3.SA")
