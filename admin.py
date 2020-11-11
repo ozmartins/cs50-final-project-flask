@@ -202,6 +202,30 @@ def update_cdi():
 
 def update_income_statement(history):
     for year in history:
+        endDate=datetime.today()
+        researchDevelopment=0
+        effectOfAccountingCharges=0
+        incomeBeforeTax=0
+        minorityInterest=0
+        netIncome=0
+        sellingGeneralAdministrative=0
+        grossProfit=0
+        ebit=0
+        operatingIncome=0
+        otherOperatingExpenses=0
+        interestExpense=0
+        extraordinaryItems=0
+        nonRecurring=0
+        otherItems=0
+        incomeTaxExpense=0
+        totalRevenue=0
+        totalOperatingExpenses=0
+        costOfRevenue=0
+        totalOtherIncomeExpenseNet=0
+        discontinuedOperations=0
+        netIncomeFromContinuingOps=0
+        netIncomeApplicableToCommonShares=0
+
         if len(year['researchDevelopment']) > 0:
             researchDevelopment = year['researchDevelopment']['longFmt']
 
@@ -271,7 +295,68 @@ def update_income_statement(history):
         if len(year['netIncomeApplicableToCommonShares']) > 0:
             netIncomeApplicableToCommonShares = year['netIncomeApplicableToCommonShares']['longFmt']
 
+        conn = sqlite3.connect('./db/cs50.db')
 
+        c = conn.cursor()
+
+        c.execute("""insert into income_statement 
+                    (                        
+                        idStock,
+                        endDate,
+                        researchDevelopment,
+                        effectOfAccountingCharges,
+                        incomeBeforeTax,
+                        minorityInterest,
+                        netIncome,
+                        sellingGeneralAdministrative,
+                        grossProfit,
+                        ebit  ,
+                        operatingIncome,
+                        otherOperatingExpenses,
+                        interestExpense,
+                        extraordinaryItems,
+                        nonRecurring,
+                        otherItems,
+                        incomeTaxExpense,
+                        totalRevenue,
+                        totalOperatingExpenses,
+                        costOfRevenue,
+                        totalOtherIncomeExpenseNet,
+                        discontinuedOperations,
+                        netIncomeFromContinuingOps,
+                        netIncomeApplicableToCommonShares
+                    )
+                    values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",                        
+                    (
+                        1,
+                        endDate,
+                        researchDevelopment,
+                        effectOfAccountingCharges,
+                        incomeBeforeTax,
+                        minorityInterest,
+                        netIncome,
+                        sellingGeneralAdministrative,
+                        grossProfit,
+                        ebit,
+                        operatingIncome,
+                        otherOperatingExpenses,
+                        interestExpense,
+                        extraordinaryItems,
+                        nonRecurring,
+                        otherItems,
+                        incomeTaxExpense,
+                        totalRevenue,
+                        totalOperatingExpenses,
+                        costOfRevenue,
+                        totalOtherIncomeExpenseNet,
+                        discontinuedOperations,
+                        netIncomeFromContinuingOps,
+                        netIncomeApplicableToCommonShares                   
+                    )
+        )
+
+        conn.commit()
+                    
 def update_stock_data(stock):
     url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-financials"
 
@@ -284,4 +369,4 @@ def update_stock_data(stock):
     update_income_statement(resp['incomeStatementHistory']['incomeStatementHistory'])
 
 
-update_stock_data("PETR3.SA")
+update_stock_data("ABEV3.SA")
