@@ -201,6 +201,12 @@ def update_cdi():
 
 
 def update_income_statement(history):
+    conn = sqlite3.connect('./db/cs50.db')
+
+    c = conn.cursor()
+
+    c.execute("delete from income_statement")
+
     for year in history:
         endDate=datetime.today()
         researchDevelopment=0
@@ -227,77 +233,73 @@ def update_income_statement(history):
         netIncomeApplicableToCommonShares=0
 
         if len(year['researchDevelopment']) > 0:
-            researchDevelopment = year['researchDevelopment']['longFmt']
+            researchDevelopment = year['researchDevelopment']['raw']
 
         if len(year['effectOfAccountingCharges']) > 0:
-            effectOfAccountingCharges = year['effectOfAccountingCharges']['longFmt']
+            effectOfAccountingCharges = year['effectOfAccountingCharges']['raw']
 
         if len(year['incomeBeforeTax']) > 0:
-            incomeBeforeTax = year['incomeBeforeTax']['longFmt']
+            incomeBeforeTax = year['incomeBeforeTax']['raw']
         
         if len(year['minorityInterest']) > 0:
-            minorityInterest = year['minorityInterest']['longFmt']
+            minorityInterest = year['minorityInterest']['raw']
         
         if len(year['netIncome']) > 0:
-            netIncome = year['netIncome']['longFmt']
+            netIncome = year['netIncome']['raw']
         
         if len(year['sellingGeneralAdministrative']) > 0:
-            sellingGeneralAdministrative = year['sellingGeneralAdministrative']['longFmt']
+            sellingGeneralAdministrative = year['sellingGeneralAdministrative']['raw']
         
         if len(year['grossProfit']) > 0:
-            grossProfit = year['grossProfit']['longFmt']
+            grossProfit = year['grossProfit']['raw']
         
         if len(year['ebit']) > 0:
-            ebit = year['ebit']['longFmt']
+            ebit = year['ebit']['raw']
         
         if len(year['endDate']) > 0:
             endDate = year['endDate']['fmt']
         
         if len(year['operatingIncome']) > 0:
-            operatingIncome = year['operatingIncome']['longFmt']
+            operatingIncome = year['operatingIncome']['raw']
         
         if len(year['otherOperatingExpenses']) > 0:
-            otherOperatingExpenses = year['otherOperatingExpenses']['longFmt']
+            otherOperatingExpenses = year['otherOperatingExpenses']['raw']
         
         if len(year['interestExpense']) > 0:
-            interestExpense = year['interestExpense']['longFmt']
+            interestExpense = year['interestExpense']['raw']
         
         if len(year['extraordinaryItems']) > 0:
-            extraordinaryItems = year['extraordinaryItems']['longFmt']
+            extraordinaryItems = year['extraordinaryItems']['raw']
         
         if len(year['nonRecurring']) > 0:
-            nonRecurring = year['nonRecurring']['longFmt']
+            nonRecurring = year['nonRecurring']['raw']
         
         if len(year['otherItems']) > 0:
-            otherItems = year['otherItems']['longFmt']
+            otherItems = year['otherItems']['raw']
         
         if len(year['incomeTaxExpense']) > 0:
-            incomeTaxExpense = year['incomeTaxExpense']['longFmt']
+            incomeTaxExpense = year['incomeTaxExpense']['raw']
         
         if len(year['totalRevenue']) > 0:
-            totalRevenue = year['totalRevenue']['longFmt']
+            totalRevenue = year['totalRevenue']['raw']
         
         if len(year['totalOperatingExpenses']) > 0:
-            totalOperatingExpenses = year['totalOperatingExpenses']['longFmt']
+            totalOperatingExpenses = year['totalOperatingExpenses']['raw']
         
         if len(year['costOfRevenue']) > 0:
-            costOfRevenue = year['costOfRevenue']['longFmt']
+            costOfRevenue = year['costOfRevenue']['raw']
         
         if len(year['totalOtherIncomeExpenseNet']) > 0:
-            totalOtherIncomeExpenseNet = year['totalOtherIncomeExpenseNet']['longFmt']
+            totalOtherIncomeExpenseNet = year['totalOtherIncomeExpenseNet']['raw']
         
         if len(year['discontinuedOperations']) > 0:
-            discontinuedOperations = year['discontinuedOperations']['longFmt']
+            discontinuedOperations = year['discontinuedOperations']['raw']
         
         if len(year['netIncomeFromContinuingOps']) > 0:
-            netIncomeFromContinuingOps = year['netIncomeFromContinuingOps']['longFmt']
+            netIncomeFromContinuingOps = year['netIncomeFromContinuingOps']['raw']
         
         if len(year['netIncomeApplicableToCommonShares']) > 0:
-            netIncomeApplicableToCommonShares = year['netIncomeApplicableToCommonShares']['longFmt']
-
-        conn = sqlite3.connect('./db/cs50.db')
-
-        c = conn.cursor()
+            netIncomeApplicableToCommonShares = year['netIncomeApplicableToCommonShares']['raw']
 
         c.execute("""insert into income_statement 
                     (                        
@@ -357,6 +359,141 @@ def update_income_statement(history):
 
         conn.commit()
                     
+def update_balance_sheet(history):
+    conn = sqlite3.connect('./db/cs50.db')
+
+    c = conn.cursor()
+
+    c.execute("delete from balance_sheet") 
+
+    for year in history:
+        intangibleAssets=0
+        capitalSurplus=0
+        totalLiab=0
+        totalStockholderEquity=0
+        otherCurrentLiab=0
+        totalAssets=0
+        endDate=date.today()
+        commonStock=0
+        otherCurrentAssets=0
+        retainedEarnings=0
+        otherLiab=0
+        treasuryStock=0
+        otherAssets=0
+        cash=0
+        totalCurrentLiabilities=0
+        shortLongTermDebt=0
+        propertyPlantEquipment=0
+        totalCurrentAssets=0
+        netTangibleAssets=0
+        netReceivables=0
+        longTermDebt=0
+        inventory=0
+        accountsPayable=0       
+
+        if len(year['intangibleAssets']) > 0:
+            intangibleAssets = year['intangibleAssets']['raw']
+        if len(year['capitalSurplus']) > 0:
+            capitalSurplus = year['capitalSurplus']['raw']
+        if len(year['totalLiab']) > 0:
+            totalLiab = year['totalLiab']['raw']
+        if len(year['totalStockholderEquity']) > 0:
+            totalStockholderEquity = year['totalStockholderEquity']['raw']
+        if len(year['otherCurrentLiab']) > 0:
+            otherCurrentLiab = year['otherCurrentLiab']['raw']
+        if len(year['totalAssets']) > 0:
+            totalAssets = year['totalAssets']['raw']
+        if len(year['endDate']) > 0:
+            endDate = year['endDate']['fmt']
+        if len(year['commonStock']) > 0:
+            commonStock = year['commonStock']['raw']
+        if len(year['otherCurrentAssets']) > 0:
+            otherCurrentAssets = year['otherCurrentAssets']['raw']
+        if len(year['retainedEarnings']) > 0:
+            retainedEarnings = year['retainedEarnings']['raw']
+        if len(year['otherLiab']) > 0:
+            otherLiab = year['otherLiab']['raw']
+        if len(year['treasuryStock']) > 0:
+            treasuryStock = year['treasuryStock']['raw']
+        if len(year['otherAssets']) > 0:
+            otherAssets = year['otherAssets']['raw']
+        if len(year['cash']) > 0:
+            cash = year['cash']['raw']
+        if len(year['totalCurrentLiabilities']) > 0:
+            totalCurrentLiabilities = year['totalCurrentLiabilities']['raw']
+        if len(year['shortLongTermDebt']) > 0:
+            shortLongTermDebt = year['shortLongTermDebt']['raw']
+        if len(year['propertyPlantEquipment']) > 0:
+            propertyPlantEquipment = year['propertyPlantEquipment']['raw']
+        if len(year['totalCurrentAssets']) > 0:
+            totalCurrentAssets = year['totalCurrentAssets']['raw']
+        if len(year['netTangibleAssets']) > 0:
+            netTangibleAssets = year['netTangibleAssets']['raw']
+        if len(year['netReceivables']) > 0:
+            netReceivables = year['netReceivables']['raw']
+        if len(year['longTermDebt']) > 0:
+            longTermDebt = year['longTermDebt']['raw']
+        if len(year['inventory']) > 0:
+            inventory = year['inventory']['raw']
+        if len(year['accountsPayable']) > 0:
+            accountsPayable = year['accountsPayable']['raw']
+
+        c.execute("""insert into balance_sheet (
+                                idStock,
+                                endDate,
+                                intangibleAssets,
+                                capitalSurplus,
+                                totalLiab,
+                                totalStockholderEquity,
+                                otherCurrentLiab,
+                                totalAssets,
+                                commonStock,
+                                otherCurrentAssets,
+                                retainedEarnings,
+                                otherLiab,
+                                treasuryStock,
+                                otherAssets,
+                                cash,
+                                totalCurrentLiabilities,
+                                shortLongTermDebt,
+                                propertyPlantEquipment,
+                                totalCurrentAssets,
+                                netTangibleAssets,
+                                netReceivables,
+                                longTermDebt,
+                                inventory,
+                                accountsPayable
+                        )
+                        values 
+                        (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                        (1, 
+                         endDate, 
+                         intangibleAssets, 
+                         capitalSurplus, 
+                         totalLiab, 
+                         totalStockholderEquity, 
+                         otherCurrentLiab, 
+                         totalAssets, 
+                         commonStock, 
+                         otherCurrentAssets, 
+                         retainedEarnings, 
+                         otherLiab, 
+                         treasuryStock, 
+                         otherAssets,
+                         cash, 
+                         totalCurrentLiabilities,
+                         shortLongTermDebt, 
+                         propertyPlantEquipment, 
+                         totalCurrentAssets, 
+                         netTangibleAssets, 
+                         netReceivables, 
+                         longTermDebt, 
+                         inventory, 
+                         accountsPayable))
+        
+        conn.commit()                        
+
+
 def update_stock_data(stock):
     url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-financials"
 
@@ -367,6 +504,8 @@ def update_stock_data(stock):
     resp = response.json() 
 
     update_income_statement(resp['incomeStatementHistory']['incomeStatementHistory'])
+
+    update_balance_sheet(resp['balanceSheetHistory']['balanceSheetStatements'])
 
 
 update_stock_data("ABEV3.SA")
