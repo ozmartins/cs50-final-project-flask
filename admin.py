@@ -491,7 +491,63 @@ def update_balance_sheet(history):
                          inventory, 
                          accountsPayable))
         
-        conn.commit()                        
+        conn.commit() 
+
+def update_cash_flow(history):
+    for year in history:
+        idstock=1
+        endDate=datetime.today()
+        changeToLiabilities=0
+        totalCashflowsFromInvestingActivities=0
+        netBorrowings=0
+        totalCashFromFinancingActivities=0
+        changeToOperatingActivities=0
+        issuanceOfStock=0
+        netIncome=0
+        changeInCash=0        
+        repurchaseOfStock=0
+        totalCashFromOperatingActivities=0
+        depreciation=0
+        changeToInventory=0
+        changeToAccountReceivables=0
+        otherCashflowsFromFinancingActivities=0
+        changeToNetincome=0
+        capitalExpenditures=0
+
+        if len(year['endDate'])>0:
+			endDate=year['endData']['fmt']
+        if len(year['changeToLiabilities'])>0:
+			changeToLiabilities=year['changeToLiabilities']['longFmt']
+        if len(year['totalCashflowsFromInvestingActivities'])>0:
+			totalCashflowsFromInvestingActivities=year['totalCashflowsFromInvestingActivities']['longFmt']
+        if len(year['netBorrowings'])>0:
+			netBorrowings=year['netBorrowings']['longFmt']
+        if len(year['totalCashFromFinancingActivities'])>0:
+			totalCashFromFinancingActivities=year['totalCashFromFinancingActivities']['longFmt']
+        if len(year['changeToOperatingActivities'])>0:
+			changeToOperatingActivities=year['changeToOperatingActivities']['longFmt']
+        if len(year['issuanceOfStock'])>0:
+			issuanceOfStock=year['issuanceOfStock']['longFmt']
+        if len(year['netIncome'])>0:
+			netIncome=year['netIncome']['longFmt']
+        if len(year['changeInCash'])>0:
+			changeInCash=year['changeInCash']['longFmt']
+        if len(year['repurchaseOfStock'])>0:
+			repurchaseOfStock=year['repurchaseOfStock']['longFmt']
+        if len(year['totalCashFromOperatingActivities'])>0:
+			totalCashFromOperatingActivities=year['totalCashFromOperatingActivities']['longFmt']
+        if len(year['depreciation'])>0:
+			depreciation=year['depreciation']['longFmt']
+        if len(year['changeToInventory'])>0:
+			changeToInventory=year['changeToInventory']['longFmt']
+        if len(year['changeToAccountReceivables'])>0:
+			changeToAccountReceivables=year['changeToAccountReceivables']['longFmt']
+        if len(year['otherCashflowsFromFinancingActivities'])>0:
+			otherCashflowsFromFinancingActivities=year['otherCashflowsFromFinancingActivities']['longFmt']
+        if len(year['changeToNetincome'])>0:
+			changeToNetincome=year['changeToNetincome']['longFmt']
+        if len(year['capitalExpenditures'])>0:
+			capitalExpenditures=year['capitalExpenditures']['longFmt']
 
 
 def update_stock_data(stock):
@@ -506,6 +562,8 @@ def update_stock_data(stock):
     update_income_statement(resp['incomeStatementHistory']['incomeStatementHistory'])
 
     update_balance_sheet(resp['balanceSheetHistory']['balanceSheetStatements'])
+
+    update_cash_flow(resp['cashflowStatementHistory']['cashflowStatements'])
 
 
 update_stock_data("ABEV3.SA")
