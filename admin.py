@@ -3,6 +3,7 @@ import requests
 from helpers import apology, last_month, month_name, last_day_of_month, first_day_of_month, one_year_ago
 from datetime import date, datetime, timedelta
 
+
 def create_indicators_record():
     conn = sqlite3.connect('./db/cs50.db')
     c = conn.cursor()
@@ -53,6 +54,7 @@ def update_ibovespa():
     
     conn.commit()
 
+
 def update_ifix():    
     url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes"
 
@@ -77,6 +79,7 @@ def update_ifix():
     
     conn.commit()
 
+
 def update_news():
     #cdeadf494b5e4fd48b31a9900ad9a6b5
     url = "http://newsapi.org/v2/everything"
@@ -100,6 +103,7 @@ def update_news():
         )
     
     conn.commit()
+
 
 def update_selic():
     #https://api.bcb.gov.br/dados/serie/bcdata.sgs.11/dados?formato=json&dataInicial=21/10/2019&dataFinal=21/10/2020
@@ -136,6 +140,7 @@ def update_selic():
         (initial_date, final_date, last_month().strftime('%Y%m'), month_name(last_month().month)))
     
     conn.commit()
+
 
 def update_ipca():
     url = "https://api.bcb.gov.br/dados/serie/bcdata.sgs.16121/dados"
@@ -357,8 +362,9 @@ def update_income_statement(history):
                     )
         )
 
-        conn.commit()
+    conn.commit()
                     
+
 def update_balance_sheet(history):
     conn = sqlite3.connect('./db/cs50.db')
 
@@ -491,9 +497,16 @@ def update_balance_sheet(history):
                          inventory, 
                          accountsPayable))
         
-        conn.commit() 
+    conn.commit() 
+
 
 def update_cash_flow(history):
+    conn = sqlite3.connect('./db/cs50.db')
+
+    c = conn.cursor()
+
+    c.execute("delete from cash_flow") 
+
     for year in history:
         idstock=1
         endDate=datetime.today()
@@ -515,41 +528,88 @@ def update_cash_flow(history):
         capitalExpenditures=0
 
         if len(year['endDate'])>0:
-			endDate=year['endData']['fmt']
+            endDate=year['endDate']['fmt']
         if len(year['changeToLiabilities'])>0:
-			changeToLiabilities=year['changeToLiabilities']['longFmt']
+            changeToLiabilities=year['changeToLiabilities']['raw']
         if len(year['totalCashflowsFromInvestingActivities'])>0:
-			totalCashflowsFromInvestingActivities=year['totalCashflowsFromInvestingActivities']['longFmt']
+            totalCashflowsFromInvestingActivities=year['totalCashflowsFromInvestingActivities']['raw']
         if len(year['netBorrowings'])>0:
-			netBorrowings=year['netBorrowings']['longFmt']
+            netBorrowings=year['netBorrowings']['raw']
         if len(year['totalCashFromFinancingActivities'])>0:
-			totalCashFromFinancingActivities=year['totalCashFromFinancingActivities']['longFmt']
-        if len(year['changeToOperatingActivities'])>0:
-			changeToOperatingActivities=year['changeToOperatingActivities']['longFmt']
+            totalCashFromFinancingActivities=year['totalCashFromFinancingActivities']['raw']
+        if 'changeToOperatingActivities' in year and len(year['changeToOperatingActivities'])>0:
+            changeToOperatingActivities=year['changeToOperatingActivities']['raw']
         if len(year['issuanceOfStock'])>0:
-			issuanceOfStock=year['issuanceOfStock']['longFmt']
+            issuanceOfStock=year['issuanceOfStock']['raw']
         if len(year['netIncome'])>0:
-			netIncome=year['netIncome']['longFmt']
+            netIncome=year['netIncome']['raw']
         if len(year['changeInCash'])>0:
-			changeInCash=year['changeInCash']['longFmt']
+            changeInCash=year['changeInCash']['raw']
         if len(year['repurchaseOfStock'])>0:
-			repurchaseOfStock=year['repurchaseOfStock']['longFmt']
+            repurchaseOfStock=year['repurchaseOfStock']['raw']
         if len(year['totalCashFromOperatingActivities'])>0:
-			totalCashFromOperatingActivities=year['totalCashFromOperatingActivities']['longFmt']
+            totalCashFromOperatingActivities=year['totalCashFromOperatingActivities']['raw']
         if len(year['depreciation'])>0:
-			depreciation=year['depreciation']['longFmt']
+            depreciation=year['depreciation']['raw']
         if len(year['changeToInventory'])>0:
-			changeToInventory=year['changeToInventory']['longFmt']
+            changeToInventory=year['changeToInventory']['raw']
         if len(year['changeToAccountReceivables'])>0:
-			changeToAccountReceivables=year['changeToAccountReceivables']['longFmt']
+            changeToAccountReceivables=year['changeToAccountReceivables']['raw']
         if len(year['otherCashflowsFromFinancingActivities'])>0:
-			otherCashflowsFromFinancingActivities=year['otherCashflowsFromFinancingActivities']['longFmt']
+            otherCashflowsFromFinancingActivities=year['otherCashflowsFromFinancingActivities']['raw']
         if len(year['changeToNetincome'])>0:
-			changeToNetincome=year['changeToNetincome']['longFmt']
+            changeToNetincome=year['changeToNetincome']['raw']
         if len(year['capitalExpenditures'])>0:
-			capitalExpenditures=year['capitalExpenditures']['longFmt']
+            capitalExpenditures=year['capitalExpenditures']['raw']
 
+        c.execute(
+            """insert into cash_flow
+            (
+                    idstock,
+                    endDate,
+                    changeToLiabilities,
+                    totalCashflowsFromInvestingActivities,
+                    netBorrowings,
+                    totalCashFromFinancingActivities,
+                    changeToOperatingActivities,
+                    issuanceOfStock,
+                    netIncome,
+                    changeInCash,
+                    repurchaseOfStock,
+                    totalCashFromOperatingActivities,
+                    depreciation,
+                    changeToInventory,
+                    changeToAccountReceivables,
+                    otherCashflowsFromFinancingActivities,
+                    changeToNetincome,
+                    capitalExpenditures
+            )
+            values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+            (
+                    idstock,
+                    endDate,
+                    changeToLiabilities,
+                    totalCashflowsFromInvestingActivities,
+                    netBorrowings,
+                    totalCashFromFinancingActivities,
+                    changeToOperatingActivities,
+                    issuanceOfStock,
+                    netIncome,
+                    changeInCash,
+                    repurchaseOfStock,
+                    totalCashFromOperatingActivities,
+                    depreciation,
+                    changeToInventory,
+                    changeToAccountReceivables,
+                    otherCashflowsFromFinancingActivities,
+                    changeToNetincome,
+                    capitalExpenditures
+            )
+        )
 
+    conn.commit() 
+
+        
 def update_stock_data(stock):
     url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-financials"
 
