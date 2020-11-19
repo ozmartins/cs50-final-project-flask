@@ -399,7 +399,7 @@ def update_balance_sheet(history):
 
         if len(year['intangibleAssets']) > 0:
             intangibleAssets = year['intangibleAssets']['raw']
-        if len(year['capitalSurplus']) > 0:
+        if 'capitalSurplus' in year and len(year['capitalSurplus']) > 0:
             capitalSurplus = year['capitalSurplus']['raw']
         if len(year['totalLiab']) > 0:
             totalLiab = year['totalLiab']['raw']
@@ -625,5 +625,14 @@ def update_stock_data(stock):
 
     update_cash_flow(resp['cashflowStatementHistory']['cashflowStatements'])
 
+def update_all_stocks_data():
+    conn = sqlite3.connect('./db/cs50.db')
+    c = conn.cursor()
+    c.execute("select ticker from stock")
+    rows = c.fetchall()    
+    for row in rows:
+        symbol = '{0}.SA'.format(row[0])
+        print(symbol)
+        update_stock_data(symbol)
 
-update_stock_data("ABEV3.SA")
+update_all_stocks_data()
