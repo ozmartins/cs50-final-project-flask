@@ -632,5 +632,3 @@ def update_all_stocks_data():
         symbol = '{0}.SA'.format(row[1])
         print(symbol)
         update_stock_data(idstock, symbol)
-
-update_all_stocks_data()

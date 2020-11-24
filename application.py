@@ -52,7 +52,7 @@ def stocks_list():
 
 @app.route("/stock/<symbol>", methods=["GET"])
 def stock(symbol=""):
-    return render_template("stock.html")
+    return render_template("stock.html", symbol=symbol)
 
 
 def errorhandler(e):    
