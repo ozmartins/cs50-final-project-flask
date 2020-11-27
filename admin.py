@@ -611,19 +611,122 @@ def update_stock_data(idstock, ticker):
     response = requests.request("GET", url, headers=get_yahoo_headers(), params=querystring)
 
     resp = response.json() 
-
+    
     update_income_statement(idstock, resp['incomeStatementHistory']['incomeStatementHistory'])
 
     update_balance_sheet(idstock, resp['balanceSheetHistory']['balanceSheetStatements'])
 
     update_cash_flow(idstock, resp['cashflowStatementHistory']['cashflowStatements'])
 
+def update_stock_profile(idstock, ticker):
+    url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-profile"
+
+    querystring = {"symbol":ticker,"region":"BR"}    
+
+    response = requests.request("GET", url, headers=get_yahoo_headers(), params=querystring)
+
+    resp = response.json()
+
+    zip = ''
+    sector = ''
+    fullTimeEmployees = 0
+    compensationRisk = 0
+    auditRisk = 0
+    longBusinessSummary = ''
+    city = ''
+    phone = ''
+    shareHolderRightsRisk = 0
+    governanceEpochDate = 0
+    boardRisk = 0
+    country = ''
+    website = ''
+    maxAge = 0
+    overallRisk = 0
+    address1 = ''
+    industry = ''
+    address2 = ''
+
+    if 'zip' in resp['assetProfile']:
+	    zip = resp['assetProfile']['zip']
+    if 'sector' in resp['assetProfile']:
+	    sector = resp['assetProfile']['sector']
+    if 'fullTimeEmployees' in resp['assetProfile']:
+	    fullTimeEmployees = resp['assetProfile']['fullTimeEmployees']
+    if 'compensationRisk' in resp['assetProfile']:
+	    compensationRisk = resp['assetProfile']['compensationRisk']
+    if 'auditRisk' in resp['assetProfile']:
+	    auditRisk = resp['assetProfile']['auditRisk']
+    if 'longBusinessSummary' in resp['assetProfile']:
+	    longBusinessSummary = resp['assetProfile']['longBusinessSummary']
+    if 'city' in resp['assetProfile']:
+	    city = resp['assetProfile']['city']
+    if 'phone' in resp['assetProfile']:
+	    phone = resp['assetProfile']['phone']
+    if 'shareHolderRightsRisk' in resp['assetProfile']:
+	    shareHolderRightsRisk = resp['assetProfile']['shareHolderRightsRisk']
+    if 'governanceEpochDate' in resp['assetProfile']:
+	    governanceEpochDate = resp['assetProfile']['governanceEpochDate']
+    if 'boardRisk' in resp['assetProfile']:
+	    boardRisk = resp['assetProfile']['boardRisk']
+    if 'country' in resp['assetProfile']:
+	    country = resp['assetProfile']['country']
+    if 'website' in resp['assetProfile']:
+	    website = resp['assetProfile']['website']
+    if 'maxAge' in resp['assetProfile']:
+	    maxAge = resp['assetProfile']['maxAge']
+    if 'overallRisk' in resp['assetProfile']:
+	    overallRisk = resp['assetProfile']['overallRisk']
+    if 'address1' in resp['assetProfile']:
+	    address1 = resp['assetProfile']['address1']
+    if 'industry' in resp['assetProfile']:
+	    industry = resp['assetProfile']['industry']
+    if 'address2' in resp['assetProfile']:
+	    address2 = resp['assetProfile']['address2'] 
+
+    conn = sqlite3.connect('./db/cs50.db')
+
+    c = conn.cursor()
+
+    c.execute(
+        """insert into stock_profile 
+        (
+            idstock,
+            zip,
+            sector,
+            fullTimeEmployees,
+            compensationRisk,
+            auditRisk ,
+            longBusinessSummary,
+            city,
+            phone,
+            shareHolderRightsRisk,
+            governanceEpochDate,
+            boardRisk,
+            country,
+            website,
+            maxAge,
+            overallRisk,
+            address1,
+            industry,
+            address2
+        )
+        values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+        (
+            idstock, zip, sector, fullTimeEmployees, compensationRisk, auditRisk, longBusinessSummary, city, phone, shareHolderRightsRisk, 
+            governanceEpochDate, boardRisk, country, website, maxAge, overallRisk, address1, industry, address2            
+        )    
+    )
+
+    conn.commit()
+    
+
 def update_all_stocks_data():
     conn = sqlite3.connect('./db/cs50.db')
-    c = conn.cursor()
+    c = conn.cursor()    
     c.execute("delete from income_statement")
     c.execute("delete from balance_sheet")
     c.execute("delete from cash_flow")
+    c.execute("delete from stock_profile")
     conn.commit()
     c.execute("select id, ticker from stock")
     rows = c.fetchall()    
@@ -631,4 +734,8 @@ def update_all_stocks_data():
         idstock = row[0]
         symbol = '{0}.SA'.format(row[1])
         print(symbol)
+        update_stock_profile(idstock, symbol)
         update_stock_data(idstock, symbol)
+
+
+update_all_stocks_data()
