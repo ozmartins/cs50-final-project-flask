@@ -86,17 +86,19 @@ def get_filters():
 def get_stock_list():
     conn = sqlite3.connect('./db/cs50.db')
     c = conn.cursor()
-    c.execute("select ticker, name from stock")
+    c.execute("""select ticker, name, sector, industry, longBusinessSummary 
+                 from stock
+                 left outer join stock_profile on (stock_profile.idstock = stock.id)""")
     rows = c.fetchall()
     stock_list = []
     for row in rows:
         stock_list.append({
             "ticker": row[0][0:4],
             "name": row[1],
-            "sector": "Setor",
-            "subsector": "Sub-setor",
-            "segment": "Segment",
-            "description": ""
+            "sector": row[2],
+            "subsector": "",
+            "segment": row[3],
+            "description": row[4]
         }) 
 
     return stock_list
