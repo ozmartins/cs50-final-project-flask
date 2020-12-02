@@ -736,6 +736,3 @@ def update_all_stocks_data():
         print(symbol)
         update_stock_profile(idstock, symbol)
         update_stock_data(idstock, symbol)
-
-
-update_all_stocks_data()
