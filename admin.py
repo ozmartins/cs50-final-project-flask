@@ -621,10 +621,10 @@ def update_stock_data(idstock, ticker):
 def update_stock_profile(idstock, ticker):
     url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-profile"
 
-    querystring = {"symbol":ticker,"region":"BR"}    
+    querystring = {"symbol":ticker,"region":"BR"}
 
     response = requests.request("GET", url, headers=get_yahoo_headers(), params=querystring)
-
+    
     resp = response.json()
 
     zip = ''
@@ -734,5 +734,10 @@ def update_all_stocks_data():
         idstock = row[0]
         symbol = '{0}.SA'.format(row[1])
         print(symbol)
-        update_stock_profile(idstock, symbol)
-        update_stock_data(idstock, symbol)
+        try:
+            update_stock_profile(idstock, symbol)
+            update_stock_data(idstock, symbol)
+        except:
+            print('Error getting data from the next symbol: {}'.format(symbol))
+
+update_stock_profile(168, 'BTOW3.SA')
