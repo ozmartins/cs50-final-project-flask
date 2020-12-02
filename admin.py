@@ -739,5 +739,3 @@ def update_all_stocks_data():
             update_stock_data(idstock, symbol)
         except:
             print('Error getting data from the next symbol: {}'.format(symbol))
-
-update_stock_profile(168, 'BTOW3.SA')
