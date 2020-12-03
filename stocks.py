@@ -30,56 +30,35 @@ def get_orderby_criterias():
 
     return orderby_criterias
 
-def get_filters():
-    filters = [
-        {
-            "id": "0",
-            "description": "Setor",
-            "options": 
-                [ 
-                    {
-                        "id": "0",
-                        "description": "Setor 1"
-                    },
-                    {
-                        "id": "1",
-                        "description": "Setor 2"
-                    },
-                    {
-                        "id": "2",
-                        "description": "Setor 3"
-                    },
-                    {
-                        "id": "3",
-                        "description": "Setor 4"
-                    }                
-                ]
-        },
-        {
-            "id": "1",
-            "description": "Sub-Setor",
-            "options": 
-                [
-                    {
-                        "id": "0",
-                        "description": "Sub-Setor 1"
-                    },
-                    {
-                        "id": "1",
-                        "description": "Oleo e Gas"
-                    },
-                    {
-                        "id": "2",
-                        "description": "Sub-Setor 3"
-                    },
-                    {
-                        "id": "3",
-                        "description": "Sub-Setor 4"
-                    }      
-                ]          
+def get_filter_options(filter_field):    
+    options = []
 
-        }
-    ]
+    conn = sqlite3.connect('./db/cs50.db')
+    c = conn.cursor()
+    
+    c.execute("select distinct {0} from stock_profile".format(filter_field))
+    rows = c.fetchall()
+    for row in rows:        
+        options.append({
+            "value": row[0]            
+        })    
+
+    return options
+
+def get_filters():    
+    filters = []        
+    
+    filters.append({
+        "field": "sector",
+        "description": "Setor",
+        "options": get_filter_options("sector")
+    })
+
+    filters.append({
+        "field": "industry",
+        "description": "Segmento",
+        "options": get_filter_options("industry")
+    })
 
     return filters
 
