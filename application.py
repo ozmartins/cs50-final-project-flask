@@ -42,19 +42,42 @@ def index():
 
 @app.route("/stocks-grid", methods=["GET", "POST"])
 def stocks_grid():
-    if request.method=="GET":
-        return render_template("stocks-grid.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list([]))
-    elif request.method=="POST":        
-        return render_template("stocks-grid.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list(request.form))
+    if request.method=="POST":        
+        options = []
+        for item in request.form:
+            if item != "field-name":
+                options.append(item)
+        
+        new_filter = {
+            "field-name": request.form["field-name"],
+            "options": options 
+        }
+
+        if session.get("filters") != None:
+            existing_filters = [filter for filter in session.get("filters") if filter["field-name"] == new_filter["field-name"]] 
+            print(existing_filters)
+            if len(existing_filters) > 0:                
+                for filter in session["filters"]:
+                    if filter["field-name"] == new_filter["field-name"]:
+                        old_filter = filter
+                index = session["filters"].index(old_filter)
+                session["filters"][index] = new_filter
+            else:
+                session["filters"].append(new_filter)                                    
+        else:
+            session["filters"] = [new_filter]
+
+        print("current filters")
+        print(session["filters"])
+
+    return render_template("stocks-grid.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list([]))
 
 
 @app.route("/stocks-list", methods=["GET", "POST"])
-def stocks_list():
-    if request.method=="GET":
-        return render_template("stocks-list.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list([]))
-    elif request.method=="POST":        
-        print(request.form)
-        return render_template("stocks-list.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list(request.form))
+def stocks_list():    
+    if request.method=="POST":        
+        print(request.form)    
+    return render_template("stocks-list.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list([]))
 
 
 @app.route("/stock/<symbol>", methods=["GET"])
