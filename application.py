@@ -40,14 +40,21 @@ def index():
     return render_template("index.html", indicators=get_market_indicators(), news=get_market_news())
 
 
-@app.route("/stocks-grid", methods=["GET"])
+@app.route("/stocks-grid", methods=["GET", "POST"])
 def stocks_grid():
-    return render_template("stocks-grid.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list())    
+    if request.method=="GET":
+        return render_template("stocks-grid.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list([]))
+    elif request.method=="POST":        
+        return render_template("stocks-grid.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list(request.form))
 
 
-@app.route("/stocks-list", methods=["GET"])
+@app.route("/stocks-list", methods=["GET", "POST"])
 def stocks_list():
-    return render_template("stocks-list.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list())
+    if request.method=="GET":
+        return render_template("stocks-list.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list([]))
+    elif request.method=="POST":        
+        print(request.form)
+        return render_template("stocks-list.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list(request.form))
 
 
 @app.route("/stock/<symbol>", methods=["GET"])

@@ -62,12 +62,25 @@ def get_filters():
 
     return filters
 
-def get_stock_list():
+def get_stock_list(filters):
     conn = sqlite3.connect('./db/cs50.db')
     c = conn.cursor()
+
+    whereClause = ""
+    options = ""
+    for filter in filters:        
+        if filter != "field-name":
+            options += "'{}'".format(filter)
+
+    if len(options) > 0:
+        whereClause = "where {} in ({})".format(filters["field-name"], options)
+        
+    print(whereClause)
+
     c.execute("""select ticker, name, sector, industry, longBusinessSummary 
                  from stock
-                 left outer join stock_profile on (stock_profile.idstock = stock.id)""")
+                 left outer join stock_profile on (stock_profile.idstock = stock.id) {}""".format(whereClause))
+
     rows = c.fetchall()
     stock_list = []
     for row in rows:
