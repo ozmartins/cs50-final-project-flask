@@ -65,16 +65,17 @@ def get_filters():
 def get_stock_list(filters):
     conn = sqlite3.connect('./db/cs50.db')
     c = conn.cursor()
-
+    
     whereClause = ""
     options = ""
     for filter in filters:        
-        if filter != "field-name":
-            options += "'{}'".format(filter)
-
-    if len(options) > 0:
-        whereClause = "where {} in ({})".format(filters["field-name"], options)
+        for option in filter["options"]:
+            options += "'{}'".format(option)
         
+        if len(options) > 0:
+            whereClause = "where {} in ({})".format(filter["field-name"], options)
+        
+    print("whereClause")
     print(whereClause)
 
     c.execute("""select ticker, name, sector, industry, longBusinessSummary 

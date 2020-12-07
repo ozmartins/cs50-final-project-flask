@@ -41,7 +41,7 @@ def index():
 
 
 @app.route("/stocks-grid", methods=["GET", "POST"])
-def stocks_grid():
+def stocks_grid():    
     if request.method=="POST":        
         options = []
         for item in request.form:
@@ -54,8 +54,7 @@ def stocks_grid():
         }
 
         if session.get("filters") != None:
-            existing_filters = [filter for filter in session.get("filters") if filter["field-name"] == new_filter["field-name"]] 
-            print(existing_filters)
+            existing_filters = [filter for filter in session.get("filters") if filter["field-name"] == new_filter["field-name"]]             
             if len(existing_filters) > 0:                
                 for filter in session["filters"]:
                     if filter["field-name"] == new_filter["field-name"]:
@@ -66,11 +65,14 @@ def stocks_grid():
                 session["filters"].append(new_filter)                                    
         else:
             session["filters"] = [new_filter]
+        
+        if session.get("filters") == None:
+            session["filters"] = []
 
-        print("current filters")
+        print("filters")
         print(session["filters"])
 
-    return render_template("stocks-grid.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list([]))
+    return render_template("stocks-grid.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list(session["filters"]))
 
 
 @app.route("/stocks-list", methods=["GET", "POST"])
