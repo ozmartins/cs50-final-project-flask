@@ -66,14 +66,14 @@ def get_stock_list(filters):
     conn = sqlite3.connect('./db/cs50.db')
     c = conn.cursor()
     
-    whereClause = ""
+    whereClause = "where 1=1 "
     options = ""
     for filter in filters:        
         for option in filter["options"]:
             options += "'{}'".format(option)
         
         if len(options) > 0:
-            whereClause = "where {} in ({})".format(filter["field-name"], options)
+            whereClause += "and {} in ({})".format(filter["field-name"], options)
         
     print("whereClause")
     print(whereClause)
