@@ -66,11 +66,11 @@ def stocks_grid():
         else:
             session["filters"] = [new_filter]
         
-        if session.get("filters") == None:
-            session["filters"] = []
+    if session.get("filters") == None:
+        session["filters"] = []
 
-        print("filters")
-        print(session["filters"])
+    print("filters")
+    print(session["filters"])
 
     return render_template("stocks-grid.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list(session["filters"]))
 
@@ -119,4 +119,5 @@ for code in default_exceptions:
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    #app.run(host="0.0.0.0", port=port)
+    app.run(debug=True)
