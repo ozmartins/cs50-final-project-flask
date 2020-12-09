@@ -8,12 +8,17 @@
 {% block main %}
 
 <div class="top-bar">
-    <input type="text" placeholder="Busque uma empresa">
+    <select placeholder="Busque uma empresa">        
+    </select>
     <span>Ordenar por</span>
     <form action="/order-stocks-grid" method="POST">
         <select name="order" id="order" onchange="document.getElementById('changeOrderButton').click();">
             {% for item in orderby_criterias %}
-            <option value="{{item["id"]}}">{{item["description"]}}</option>
+                {% if item["selected"] == "true" %}
+                    <option value="{{item["id"]}}" selected>{{item["description"]}}</option>
+                {% else %}
+                    <option value="{{item["id"]}}">{{item["description"]}}</option>
+                {% endif %}
             {% endfor %}
         </select>
         <button id="changeOrderButton" type="submit" hidden>OK</button>

@@ -2,25 +2,34 @@ import sqlite3
 from flask import session
 from flask_session import Session
 
-def get_orderby_criterias():
+def get_orderby_criterias():    
     orderby_criterias = [
                 {
                     "id": "name",
-                    "description": "Nome"
+                    "description": "Nome",
+                    "selected": "false"
                 },
                 {
                     "id": "totalRevenue",
-                    "description": "Receita"
+                    "description": "Receita",
+                    "selected": "false"
                 },
                 {
                     "id": "ebit",
-                    "description": "EBIT"
+                    "description": "EBIT",
+                    "selected": "false"
                 },
                 {
                     "id": "netIncome",
-                    "description": "Lucro"
+                    "description": "Lucro",
+                    "selected": "false"
                 }
             ]
+
+    for criteria in orderby_criterias:    
+        if criteria["id"] == session["order"]:
+            print(criteria)
+            criteria["selected"] = "true"
 
     return orderby_criterias
 
@@ -34,7 +43,7 @@ def exists_in_session_filters(filter_field, filter_value):
     return False
 
 
-def get_filter_options(filter_field):    
+def get_filter_options(filter_field):
     options = []
 
     conn = sqlite3.connect('./db/cs50.db')

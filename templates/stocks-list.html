@@ -13,7 +13,11 @@
     <form action="/order-stocks-list" method="POST">
         <select name="order" id="order" onchange="document.getElementById('changeOrderButton').click();">                
             {% for item in orderby_criterias %}
-            <option value="{{item["id"]}}">{{item["description"]}}</option>
+                {% if item["selected"] == "true" %}
+                    <option value="{{item["id"]}}" selected>{{item["description"]}}</option>
+                {% else %}
+                    <option value="{{item["id"]}}">{{item["description"]}}</option>
+                {% endif %}
             {% endfor %}
         </select> 
         <button id="changeOrderButton" type="submit" hidden>OK</button>
@@ -31,7 +35,11 @@
                 <input type="hidden" name="field-name" value="{{item["field"]}}">
                 {% for option in item["options"] %}              
                     <div>                      
-                        <input type="checkbox" name="{{option["name"]}}" id="filter-{{item["field"]}}{{option["name"]}}" >
+                        {% if option["value"] == "on"%}
+                            <input type="checkbox" name="{{option["name"]}}" id="filter-{{item["field"]}}{{option["name"]}}" value="{{option["value"]}}" checked>
+                        {% else %}
+                            <input type="checkbox" name="{{option["name"]}}" id="filter-{{item["field"]}}{{option["name"]}}" value="{{option["value"]}}">
+                        {% endif %}
                         <label for="filter-{{item["field"]}}{{option["field"]}}">{{option["name"]}}</label>
                     </div>
                 {% endfor %}            
