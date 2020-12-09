@@ -1,4 +1,6 @@
 import sqlite3
+from flask import session
+from flask_session import Session
 
 def get_orderby_criterias():
     orderby_criterias = [
@@ -30,22 +32,42 @@ def get_orderby_criterias():
 
     return orderby_criterias
 
+def exists_in_session_filters(filter_field, filter_value):
+    if session.get("filters") != None:        
+        for filter in session["filters"]:
+            if filter["field-name"] == filter_field:
+                for option in filter["options"]:
+                    if option == filter_value:
+                        return True                
+    return False
+
+
 def get_filter_options(filter_field):    
     options = []
 
     conn = sqlite3.connect('./db/cs50.db')
     c = conn.cursor()
-    
-    c.execute("select distinct {0} from stock_profile".format(filter_field))
+
+    whereClause = get_stock_list_where_clause()
+
+    c.execute("""select distinct {}
+                 from stock
+                 left outer join stock_profile on (stock_profile.idstock = stock.id) {}""".format(filter_field, whereClause))    
+        
     rows = c.fetchall()
-    for row in rows:        
+    for row in rows:
+        if exists_in_session_filters(filter_field, row[0]):
+            value = "on"
+        else:
+            value = "off"
         options.append({
-            "value": row[0]            
+            "name": row[0],
+            "value": value
         })    
 
     return options
 
-def get_filters():    
+def get_filters():
     filters = []        
     
     filters.append({
@@ -62,21 +84,25 @@ def get_filters():
 
     return filters
 
-def get_stock_list(filters):
-    conn = sqlite3.connect('./db/cs50.db')
-    c = conn.cursor()
-    
-    whereClause = "where 1=1 "
-    options = ""
-    for filter in filters:        
+
+def get_stock_list_where_clause():
+    whereClause = "where 1=1 "    
+    for filter in session["filters"]:
+        options = ""
         for option in filter["options"]:
+            if len(options) > 0:
+                options += ","
             options += "'{}'".format(option)
         
         if len(options) > 0:
             whereClause += "and {} in ({})".format(filter["field-name"], options)
-        
-    print("whereClause")
-    print(whereClause)
+    return whereClause
+
+def get_stock_list():
+    conn = sqlite3.connect('./db/cs50.db')
+    c = conn.cursor()
+    
+    whereClause = get_stock_list_where_clause()
 
     c.execute("""select ticker, name, sector, industry, longBusinessSummary 
                  from stock
@@ -95,3 +121,27 @@ def get_stock_list(filters):
         }) 
 
     return stock_list
+
+def manage_session_filters(form):
+    options = []
+    for item in form:
+        if item != "field-name":
+            options.append(item)
+        
+    new_filter = {
+        "field-name": form["field-name"],
+        "options": options 
+    }
+
+    if session.get("filters") != None:
+        existing_filters = [filter for filter in session.get("filters") if filter["field-name"] == new_filter["field-name"]]
+        if len(existing_filters) > 0:                
+            for filter in session["filters"]:
+                if filter["field-name"] == new_filter["field-name"]:
+                    old_filter = filter
+            index = session["filters"].index(old_filter)
+            session["filters"][index] = new_filter            
+        else:
+            session["filters"].append(new_filter)                                    
+    else:
+        session["filters"] = [new_filter]

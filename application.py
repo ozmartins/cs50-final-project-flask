@@ -9,7 +9,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 from helpers import apology
 from indicators import get_market_indicators, get_market_news
-from stocks import get_orderby_criterias, get_filters, get_stock_list
+from stocks import get_orderby_criterias, get_filters, get_stock_list, manage_session_filters
 from admin import update_ibovespa, update_ifix, update_news, update_cdi, update_selic, update_ipca
 
 
@@ -18,6 +18,7 @@ app = Flask(__name__)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
+
 
 # Ensure responses aren't cached
 @app.after_request
@@ -41,45 +42,22 @@ def index():
 
 
 @app.route("/stocks-grid", methods=["GET", "POST"])
-def stocks_grid():    
-    if request.method=="POST":        
-        options = []
-        for item in request.form:
-            if item != "field-name":
-                options.append(item)
-        
-        new_filter = {
-            "field-name": request.form["field-name"],
-            "options": options 
-        }
+def stocks_grid():
+    if request.method=="GET":
+        session["filters"] = []        
+    elif request.method=="POST":        
+        manage_session_filters(request.form)
 
-        if session.get("filters") != None:
-            existing_filters = [filter for filter in session.get("filters") if filter["field-name"] == new_filter["field-name"]]             
-            if len(existing_filters) > 0:                
-                for filter in session["filters"]:
-                    if filter["field-name"] == new_filter["field-name"]:
-                        old_filter = filter
-                index = session["filters"].index(old_filter)
-                session["filters"][index] = new_filter
-            else:
-                session["filters"].append(new_filter)                                    
-        else:
-            session["filters"] = [new_filter]
-        
-    if session.get("filters") == None:
-        session["filters"] = []
-
-    print("filters")
-    print(session["filters"])
-
-    return render_template("stocks-grid.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list(session["filters"]))
+    return render_template("stocks-grid.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list())
 
 
 @app.route("/stocks-list", methods=["GET", "POST"])
-def stocks_list():    
-    if request.method=="POST":        
-        print(request.form)    
-    return render_template("stocks-list.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list([]))
+def stocks_list():      
+    if request.method=="GET":
+        session["filters"] = []        
+    elif request.method=="POST":        
+        manage_session_filters(request.form)
+    return render_template("stocks-list.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list())
 
 
 @app.route("/stock/<symbol>", methods=["GET"])
@@ -120,4 +98,4 @@ for code in default_exceptions:
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     #app.run(host="0.0.0.0", port=port)
-    app.run(debug=True)
+    app.run()

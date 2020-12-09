@@ -27,8 +27,12 @@
                 <input type="hidden" name="field-name" value="{{item["field"]}}">
                 {% for option in item["options"] %}              
                     <div>                      
-                        <input type="checkbox" name="{{option["value"]}}" id="filter-{{item["field"]}}{{option["value"]}}">
-                        <label for="filter-{{item["field"]}}{{option["field"]}}">{{option["value"]}}</label>
+                        {% if option["value"] == "on"%}
+                            <input type="checkbox" name="{{option["name"]}}" id="filter-{{item["field"]}}{{option["name"]}}" value="{{option["value"]}}" checked>
+                        {% else %}
+                            <input type="checkbox" name="{{option["name"]}}" id="filter-{{item["field"]}}{{option["name"]}}" value="{{option["value"]}}">
+                        {% endif %}
+                        <label for="filter-{{item["field"]}}{{option["field"]}}">{{option["name"]}}</label>
                     </div>
                 {% endfor %}            
                 <div><input class="button btn btn-dark" type="submit" value="Aplicar"></div>
