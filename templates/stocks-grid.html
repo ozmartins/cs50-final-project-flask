@@ -8,8 +8,12 @@
 {% block main %}
 
 <div class="top-bar">
-    <select placeholder="Busque uma empresa">        
-    </select>
+    <form autocomplete="off" action="/action_page.php">
+        <div class="autocomplete">
+          <input id="searchStock" type="text" name="searchStock" placeholder="Busque uma empresa" style="width:300px;">
+        </div>
+        <input type="submit">
+    </form>
     <span>Ordenar por</span>
     <form action="/order-stocks-grid" method="POST">
         <select name="order" id="order" onchange="document.getElementById('changeOrderButton').click();">
@@ -65,5 +69,6 @@
 
 <script>  
     selectTab("stocks-tab");
+    autocomplete(document.getElementById("searchStock"), stocks);
 </script>
 {% endblock %}
