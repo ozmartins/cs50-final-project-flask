@@ -41,10 +41,23 @@ def index():
     return render_template("index.html", indicators=get_market_indicators(), news=get_market_news())
 
 
+@app.route("/order-stocks-list", methods=["POST"])
+def order_stocks_list():          
+    session["order"] = request.form["order"]
+    return render_template("stocks-list.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list())
+
+
+@app.route("/order-stocks-grid", methods=["POST"])
+def order_stocks_grid():      
+    session["order"] = request.form["order"]
+    return render_template("stocks-grid.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list())
+
+
 @app.route("/stocks-grid", methods=["GET", "POST"])
 def stocks_grid():
     if request.method=="GET":
-        session["filters"] = []        
+        session["filters"] = []
+        session["order"] = "name"
     elif request.method=="POST":        
         manage_session_filters(request.form)
 
@@ -54,7 +67,8 @@ def stocks_grid():
 @app.route("/stocks-list", methods=["GET", "POST"])
 def stocks_list():      
     if request.method=="GET":
-        session["filters"] = []        
+        session["filters"] = []
+        session["order"] = "name"
     elif request.method=="POST":        
         manage_session_filters(request.form)
     return render_template("stocks-list.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list())

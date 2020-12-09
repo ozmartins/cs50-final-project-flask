@@ -5,30 +5,22 @@ from flask_session import Session
 def get_orderby_criterias():
     orderby_criterias = [
                 {
-                    "id": "0",
-                    "description": "Valor de mercado"
-                },
-                {
-                    "id": "1",
+                    "id": "name",
                     "description": "Nome"
                 },
                 {
-                    "id": "2",
-                    "description": "Patrimônio líquido"
+                    "id": "totalRevenue",
+                    "description": "Receita"
                 },
                 {
-                    "id": "3",
-                    "description": "Ano de fundação"
+                    "id": "ebit",
+                    "description": "EBIT"
                 },
                 {
-                    "id": "4",
-                    "description": "Ano de IPO"
-                },
-                {
-                    "id": "5",
-                    "description": "Anos lucrativos"
+                    "id": "netIncome",
+                    "description": "Lucro"
                 }
-            ]    
+            ]
 
     return orderby_criterias
 
@@ -48,7 +40,7 @@ def get_filter_options(filter_field):
     conn = sqlite3.connect('./db/cs50.db')
     c = conn.cursor()
 
-    whereClause = get_stock_list_where_clause()
+    whereClause = get_stock_list_where_clause()    
 
     c.execute("""select distinct {}
                  from stock
@@ -87,15 +79,18 @@ def get_filters():
 
 def get_stock_list_where_clause():
     whereClause = "where 1=1 "    
-    for filter in session["filters"]:
-        options = ""
-        for option in filter["options"]:
+
+    if session["filters"] != None:
+        for filter in session["filters"]:
+            options = ""
+            for option in filter["options"]:
+                if len(options) > 0:
+                    options += ","
+                options += "'{}'".format(option)
+            
             if len(options) > 0:
-                options += ","
-            options += "'{}'".format(option)
-        
-        if len(options) > 0:
-            whereClause += "and {} in ({})".format(filter["field-name"], options)
+                whereClause += "and {} in ({})".format(filter["field-name"], options)
+
     return whereClause
 
 def get_stock_list():
@@ -104,9 +99,23 @@ def get_stock_list():
     
     whereClause = get_stock_list_where_clause()
 
-    c.execute("""select ticker, name, sector, industry, longBusinessSummary 
-                 from stock
-                 left outer join stock_profile on (stock_profile.idstock = stock.id) {}""".format(whereClause))
+    orderByClause = ""
+    if session["order"] != None:
+        if session["order"] == "name":
+            orderByClause = "order by {}".format(session["order"])
+        else:
+            orderByClause = "order by {} desc".format(session["order"])
+
+
+    c.execute("""select * from (
+                    select ticker, name, sector, industry, longBusinessSummary,
+                           (select sum(totalRevenue) from income_statement where income_statement.idstock = stock.id) as totalRevenue,
+                           (select sum(netIncome) from income_statement where income_statement.idstock = stock.id) as netIncome,
+                           (select sum(ebit) from income_statement where income_statement.idstock = stock.id) as ebit
+                    from stock
+                    left outer join stock_profile on (stock_profile.idstock = stock.id)
+                    {}
+                ) {}""".format(whereClause, orderByClause))
 
     rows = c.fetchall()
     stock_list = []

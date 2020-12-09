@@ -2,6 +2,7 @@
 
 {% block style %}
 <link rel="stylesheet" href="/static/stocks.css">
+<script type="text/javascript" src="/static/stocks.js"></script>
 {% endblock %}
 
 {% block main %}
@@ -9,11 +10,14 @@
 <div class="top-bar">
     <input type="text" placeholder="Busque uma empresa">
     <span>Ordenar por</span>
-    <select name="order" id="order">                
-        {% for item in orderby_criterias %}
-        <option value="{{item["id"]}}">{{item["description"]}}</option>
-        {% endfor %}
-    </select>    
+    <form action="/order-stocks-grid" method="POST">
+        <select name="order" id="order" onchange="document.getElementById('changeOrderButton').click();">
+            {% for item in orderby_criterias %}
+            <option value="{{item["id"]}}">{{item["description"]}}</option>
+            {% endfor %}
+        </select>
+        <button id="changeOrderButton" type="submit" hidden>OK</button>
+    </form>    
     <a href="/stocks-grid"><img src="/static/grid-view-icon-selected.png" alt=""></a>
     <a href="/stocks-list"><img src="/static/list-view-icon-unselected.png" alt=""></a>
 </div>
