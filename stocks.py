@@ -48,7 +48,7 @@ def get_filter_options(filter_field):
     conn = sqlite3.connect('./db/cs50.db')
     c = conn.cursor()
 
-    whereClause = get_stock_list_where_clause()    
+    whereClause = get_stock_list_where_clause()
 
     c.execute("""select distinct {}
                  from stock
@@ -86,7 +86,7 @@ def get_filters():
 
 
 def get_stock_list_where_clause():
-    whereClause = "where 1=1 "    
+    whereClause = "where 1=1 "
 
     if session["filters"] != None:
         for filter in session["filters"]:
@@ -105,7 +105,7 @@ def get_stock_list():
     conn = sqlite3.connect('./db/cs50.db')
     c = conn.cursor()
     
-    whereClause = get_stock_list_where_clause()
+    whereClause = get_stock_list_where_clause()    
 
     orderByClause = ""
     if session["order"] != None:
@@ -138,6 +138,23 @@ def get_stock_list():
         }) 
 
     return stock_list
+
+def search_stocks_by_name(field_name, operator, value):
+    conn = sqlite3.connect('./db/cs50.db')
+    c = conn.cursor()
+        
+    whereClause = " where {} {} '{}' ".format(field_name, operator, value)
+
+    orderByClause = "order by {}".format("name")
+
+    c.execute("select name from stock {} {}".format(whereClause, orderByClause))
+
+    rows = c.fetchall()
+    stock_list = []
+    for row in rows:
+        stock_list.append(row[0]) 
+
+    return stock_list    
 
 def manage_session_filters(form):
     options = []

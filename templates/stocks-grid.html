@@ -3,7 +3,6 @@
 {% block style %}
 <link rel="stylesheet" href="/static/stocks.css">
 <script type="text/javascript" src="/static/stocks.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 {% endblock %}
 
 {% block main %}
@@ -11,7 +10,7 @@
 <div class="top-bar">
     <form autocomplete="off" action="/action_page.php">
         <div class="autocomplete">
-          <input id="searchStock" type="text" name="searchStock" placeholder="Busque uma empresa" style="width:300px;">
+          <input id="searchStock" type="text" name="searchStock" placeholder="Busque uma empresa">
         </div>
         <input type="submit">
     </form>
@@ -70,6 +69,6 @@
 
 <script>  
     selectTab("stocks-tab");
-    autocomplete(document.getElementById("searchStock"), stocks);
+    autocomplete(document.getElementById("searchStock"));
 </script>
 {% endblock %}

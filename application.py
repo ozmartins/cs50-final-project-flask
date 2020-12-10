@@ -9,7 +9,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 from helpers import apology
 from indicators import get_market_indicators, get_market_news
-from stocks import get_orderby_criterias, get_filters, get_stock_list, manage_session_filters
+from stocks import get_orderby_criterias, get_filters, get_stock_list, manage_session_filters, search_stocks_by_name
 from admin import update_ibovespa, update_ifix, update_news, update_cdi, update_selic, update_ipca
 
 
@@ -78,10 +78,12 @@ def stocks_list():
 def stock(symbol=""):
     return render_template("stock.html", symbol=symbol)
 
-@app.route("/search_stocks/<query>", methods=["GET"])
-def search_stocks(query=""):
-    print(query)
-    return ["Bradesco", "Itaú", "Banrisul"]
+
+@app.route("/search_stocks", methods=["GET"])
+def search_stocks():                
+    stocks = search_stocks_by_name("upper(name)", "like", "%{}%".format(request.args["name"]).upper())    
+    return jsonify(stocks)
+
 
 def errorhandler(e):    
     if not isinstance(e, HTTPException):
