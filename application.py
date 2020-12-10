@@ -78,6 +78,10 @@ def stocks_list():
 def stock(symbol=""):
     return render_template("stock.html", symbol=symbol)
 
+@app.route("/search_stocks/<query>", methods=["GET"])
+def search_stocks(query=""):
+    print(query)
+    return ["Bradesco", "Itaú", "Banrisul"]
 
 def errorhandler(e):    
     if not isinstance(e, HTTPException):

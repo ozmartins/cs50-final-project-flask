@@ -1,12 +1,26 @@
 var stocks = ["Petrobrás", "Ambev", "Renner"]
 
+function searchStocks(q) {
+    axios.get('/search_stocks?'+q)
+    .then((response) => {
+      console.log(response.data);
+      console.log(response.status);
+      console.log(response.statusText);
+      console.log(response.headers);
+      console.log(response.config);
+      
+      stocks = ["AMBEV","PETR", "ITAU"]
+    });    
+}
+
 function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
     var currentFocus;
     /*execute a function when someone writes in the text field:*/
     inp.addEventListener("input", function(e) {
-        alert(e.data)
+        document.getElementById("searchStock").value
+
         var a, b, i, val = this.value;
         /*close any already open lists of autocompleted values*/
         closeAllLists();

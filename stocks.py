@@ -27,8 +27,7 @@ def get_orderby_criterias():
             ]
 
     for criteria in orderby_criterias:    
-        if criteria["id"] == session["order"]:
-            print(criteria)
+        if criteria["id"] == session["order"]:            
             criteria["selected"] = "true"
 
     return orderby_criterias
