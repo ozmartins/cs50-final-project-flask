@@ -74,9 +74,12 @@ def stocks_list():
     return render_template("stocks-list.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list())
 
 
-@app.route("/stock/<symbol>", methods=["GET"])
+@app.route("/stock/<symbol>", methods=["GET", "POSt"])
 def stock(symbol=""):
-    return render_template("stock.html", symbol=symbol)
+    if request.method == "GET":
+        return render_template("stock.html", symbol=symbol)
+    elif request.method == "POST":
+        return render_template("stock.html", symbol=request.form["symbol"])
 
 
 @app.route("/search_stocks", methods=["GET"])

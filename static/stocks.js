@@ -28,14 +28,15 @@ function autocomplete(inp) {
         /*for each item in the array...*/
         for (i = 0; i < stocks.length; i++) {
           /*check if the item starts with the same letters as the text field value:*/
-          if (stocks[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          if (stocks[i]["name"].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
             /*create a DIV element for each matching element:*/
-            b = document.createElement("DIV");
+            b = document.createElement("DIV");          
             /*make the matching letters bold:*/
-            b.innerHTML = "<strong>" + stocks[i].substr(0, val.length) + "</strong>";
-            b.innerHTML += stocks[i].substr(val.length);
+            b.innerHTML = "<strong>" + stocks[i]["name"].substr(0, val.length) + "</strong>";
+            b.innerHTML += stocks[i]["name"].substr(val.length);
             /*insert a input field that will hold the current array item's value:*/
-            b.innerHTML += "<input type='hidden' value='" + stocks[i] + "'>";
+            b.innerHTML += "<input type='hidden' value='" + stocks[i]["name"] + "'>";
+            b.innerHTML += "<input type='hidden' value='" + stocks[i]["ticker"] + "'>";
             /*execute a function when someone clicks on the item value (DIV element):*/
                 b.addEventListener("click", function(e) {
                 /*insert the value for the autocomplete text field:*/
@@ -43,6 +44,9 @@ function autocomplete(inp) {
                 /*close the list of autocompleted values,
                 (or any other open lists of autocompleted values:*/
                 closeAllLists();
+                document.getElementById("symbol").value = this.getElementsByTagName("input")[1].value;
+                document.getElementById("searchStockForm").setAttribute("action", "/stock/" + this.getElementsByTagName("input")[1].value);
+                document.getElementById("searchStockButton").click();
             });
             a.appendChild(b);
           }
@@ -106,6 +110,6 @@ function autocomplete(inp) {
 
   /*execute a function when someone clicks in the document:*/
   document.addEventListener("click", function (e) {
-      closeAllLists(e.target);
+      closeAllLists(e.target); 
   });
 }

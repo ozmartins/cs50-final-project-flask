@@ -147,12 +147,17 @@ def search_stocks_by_name(field_name, operator, value):
 
     orderByClause = "order by {}".format("name")
 
-    c.execute("select name from stock {} {}".format(whereClause, orderByClause))
+    c.execute("select ticker, name from stock {} {}".format(whereClause, orderByClause))
 
     rows = c.fetchall()
     stock_list = []
     for row in rows:
-        stock_list.append(row[0]) 
+        stock_list.append({
+            "ticker": row[0],
+            "name": row[1]
+        }) 
+
+    print(stock_list)
 
     return stock_list    
 

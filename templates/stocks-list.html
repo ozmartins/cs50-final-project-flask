@@ -9,7 +9,13 @@
 {% block main %}
 
 <div class="top-bar">
-    <input type="text" placeholder="Busque uma empresa">
+    <form id="searchStockForm" autocomplete="off" action="/stock" method="POST">
+        <div class="autocomplete">
+          <input id="searchStock" type="text" name="searchStock" placeholder="Busque uma empresa">
+          <input id="symbol" type="hidden" name="symbol" value="ABEV3">
+        </div>
+        <input type="submit" id="searchStockButton" name="searchStockButton" hidden>
+    </form>
     <span>Ordenar por</span>
     <form action="/order-stocks-list" method="POST">
         <select name="order" id="order" onchange="document.getElementById('changeOrderButton').click();">                
