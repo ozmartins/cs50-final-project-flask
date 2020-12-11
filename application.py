@@ -9,7 +9,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 from helpers import apology
 from indicators import get_market_indicators, get_market_news
-from stocks import get_orderby_criterias, get_filters, get_stock_list, manage_session_filters, search_stocks_by_name
+from stocks import get_orderby_criterias, get_filters, get_stock_list, manage_session_filters, search_stocks_by_name, get_stock_profile
 from admin import update_ibovespa, update_ifix, update_news, update_cdi, update_selic, update_ipca
 
 
@@ -76,10 +76,10 @@ def stocks_list():
 
 @app.route("/stock/<symbol>", methods=["GET", "POSt"])
 def stock(symbol=""):
-    if request.method == "GET":
-        return render_template("stock.html", symbol=symbol)
+    if request.method == "GET":        
+        return render_template("stock.html", stock_profile=get_stock_profile(symbol))
     elif request.method == "POST":
-        return render_template("stock.html", symbol=request.form["symbol"])
+        return render_template("stock.html", stock_profile=get_stock_profile(request.form["symbol"]))
 
 
 @app.route("/search_stocks", methods=["GET"])

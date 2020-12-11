@@ -47,11 +47,17 @@ html {
 }
 
 .company-data-columns {
-  display: inline-block;
+  display: flex;
 }
 
-.company-data-col {
-  float: left;
+.company-data-col-1 {
+  flex: 2;
+  margin-right: 30px;
+  margin-bottom: 10px;
+}
+
+.company-data-col-2 {
+  flex: 4;
   margin-right: 30px;
   margin-bottom: 10px;
 }

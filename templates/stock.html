@@ -11,29 +11,19 @@
 <div class="container">
     <div class="stock-header">
         <div class="img-container">
-            <img src="/static/companies-logo/{{symbol}}.gif" alt="">
+            <img src="/static/companies-logo/{{stock_profile["ticker"]}}.gif" alt="">
         </div>        
         <div class="company-data">
-            <p class="company-name">AMBEV</p>
+            <p class="company-name">{{stock_profile["name"]}}</p>
             <div class="company-data-columns">
-                <div class="company-data-col">
-                    <p>Setor: Nome do setor</p>
-                    <p>Sub-Setor: Nome do sub-setor</p>
-                    <p>Segmento: Nome do segmento</p>
-                    <p>Nível de governança: Nome do nível</p>
+                <div class="company-data-col-1">
+                    <p>Setor: {{stock_profile["sector"]}}</p>                    
+                    <p>Segmento: {{stock_profile["industry"]}}</p>
+                    <p>Site: {{stock_profile["website"]}}</p>
                 </div>
-                <div class="company-data-col">
-                    <p>Fundação: 01/01/1900</p>
-                    <p>IPO: 01/01/1900</p>
-                    <p>Free float ON: 50%</p>
-                    <p>Free float PN: 0%</p>            
-                </div>
-                <div class="company-data-col">
-                    <p>Site do RI: wwww.site.com.br</p>
-                    <p>Página na B3: wwww.b3.com.br/empresa</p>
-                    <p>Majoritário: Nome do majoritário</p>
-                    <p>Valor de mercado: R$ 0.00</p>            
-                </div>
+                <div class="company-data-col-2">
+                    <p>{{stock_profile["longBusinessSummary"]}}</p>            
+                </div>                
             </div>            
         </div>        
     </div>

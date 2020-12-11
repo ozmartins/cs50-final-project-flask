@@ -157,8 +157,6 @@ def search_stocks_by_name(field_name, operator, value):
             "name": row[1]
         }) 
 
-    print(stock_list)
-
     return stock_list    
 
 def manage_session_filters(form):
@@ -184,3 +182,24 @@ def manage_session_filters(form):
             session["filters"].append(new_filter)                                    
     else:
         session["filters"] = [new_filter]
+
+
+def get_stock_profile(symbol):
+    conn = sqlite3.connect('./db/cs50.db')
+    
+    c = conn.cursor()
+    
+    c.execute("""select stock.ticker, stock.name, stock_profile.sector, stock_profile.industry, stock_profile.longBusinessSummary
+                 from stock 
+                 join stock_profile on (stock_profile.idstock = stock.id)
+                 where stock.ticker like '{}%'""".format(symbol))
+    
+    rows = c.fetchall()
+    
+    return {
+        "ticker": rows[0][0][0:4],
+        "name": rows[0][1],
+        "sector": rows[0][2],
+        "industry": rows[0][3],
+        "longBusinessSummary": rows[0][4]
+    }
