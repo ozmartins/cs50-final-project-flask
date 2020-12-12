@@ -13,13 +13,16 @@
         <div class="img-container">
             <img src="/static/companies-logo/{{stock_profile["ticker"]}}.gif" alt="">
         </div>        
-        <div class="company-data">
-            <p class="company-name">{{stock_profile["name"]}}</p>
+        <div class="company-data">            
             <div class="company-data-columns">
                 <div class="company-data-col-1">
-                    <p>Setor: {{stock_profile["sector"]}}</p>                    
-                    <p>Segmento: {{stock_profile["industry"]}}</p>
-                    <p>Site: {{stock_profile["website"]}}</p>
+                    <p class="company-name">{{stock_profile["name"]}}</p>
+                    <p><strong>Setor</strong></p>
+                    <p></p>{{stock_profile["sector"]}}</p>                    
+                    <p><strong>Segmento</strong></p>
+                    <p></p>{{stock_profile["industry"]}}</p>
+                    <p><strong>Site</strong></p>
+                    <p></p>{{stock_profile["website"]}}</p>
                 </div>
                 <div class="company-data-col-2">
                     <p>{{stock_profile["longBusinessSummary"]}}</p>            
@@ -28,61 +31,10 @@
         </div>        
     </div>
     <div class="chart-container">
-        <div class="chart-header">
-            <div class="button-bar">
-                <button class="btn btn-dark">Receita Líquida</button>
-                <button class="btn btn-dark">EBITDA</button>
-                <button class="btn btn-dark">Lucro Líquido</button>            
-            </div>        
-            <div class="icons-bar">
-                <img src="/static/bar-chart-selected.png" alt="">
-                <img src="/static/grid-view-icon-unselected.png" alt="">
-            </div>
-        </div>        
+        <div class="chart-header">            
+        </div>
         <div id="dre"></div>        
-    </div>
-    <div class="chart-container">
-        <div class="chart-header">
-            <div class="button-bar">
-                <button class="btn btn-dark">Receita Líquida</button>
-                <button class="btn btn-dark">EBITDA</button>
-                <button class="btn btn-dark">Lucro Líquido</button>            
-            </div>        
-            <div class="icons-bar">
-                <img src="/static/bar-chart-selected.png" alt="">
-                <img src="/static/grid-view-icon-unselected.png" alt="">
-            </div>
-        </div>        
-        <div id="balanco"></div>        
-    </div>
-    <div class="chart-container">
-        <div class="chart-header">
-            <div class="button-bar">
-                <button class="btn btn-dark">Receita Líquida</button>
-                <button class="btn btn-dark">EBITDA</button>
-                <button class="btn btn-dark">Lucro Líquido</button>            
-            </div>        
-            <div class="icons-bar">
-                <img src="/static/bar-chart-selected.png" alt="">
-                <img src="/static/grid-view-icon-unselected.png" alt="">
-            </div>
-        </div>        
-        <div id="dfc"></div>        
-    </div>
-    <div class="chart-container">
-        <div class="chart-header">
-            <div class="button-bar">
-                <button class="btn btn-dark">Receita Líquida</button>
-                <button class="btn btn-dark">EBITDA</button>
-                <button class="btn btn-dark">Lucro Líquido</button>            
-            </div>        
-            <div class="icons-bar">
-                <img src="/static/bar-chart-selected.png" alt="">
-                <img src="/static/grid-view-icon-unselected.png" alt="">
-            </div>
-        </div>        
-        <div id="indicadores"></div>        
-    </div>
+    </div>       
 </div>
 
 <script type="text/javascript">
