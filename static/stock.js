@@ -1,5 +1,15 @@
+income_statement = []
+
+function getIncomeStatement(symbol) {
+    axios.get('/income_statement?symbol=' + symbol).then((response) => {              
+        alert(response.data);
+    });
+}
+
+getIncomeStatement("ABEV3.SA")
+
 // Load the Visualization API and the corechart package.
- google.charts.load('current', {'packages':['corechart']});
+google.charts.load('current', {'packages':['corechart']});
 
 // Set a callback to run when the Google Visualization API is loaded.
 google.charts.setOnLoadCallback(drawChart);
@@ -12,15 +22,7 @@ function drawChart() {
     var data2 = new google.visualization.DataTable();
     data2.addColumn('string', 'Ano');
     data2.addColumn('number', 'Receita Líquida');
-    data2.addColumn('number', 'Lucro Líquido');
-    data2.addRows([
-        ['2015', 150, 25],
-        ['2016', 175, 25],
-        ['2017', 200, 25],
-        ['2018', 225, 25],
-        ['2019', 250, 25]
-    ]);
-
+    data2.addColumn('number', 'Lucro Líquido');        
     
     var data = google.visualization.arrayToDataTable([
         ['Ano', 'Receita Líquida', 'Lucro Líquido'],
@@ -43,5 +45,5 @@ function drawChart() {
     // Instantiate and draw our chart, passing in some options.
     var dre = new google.visualization.ColumnChart (document.getElementById('dre'));        
 
-    dre.draw(data, options);    
+    dre.draw(data, options);
 }

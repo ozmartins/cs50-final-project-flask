@@ -9,7 +9,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 from helpers import apology
 from indicators import get_market_indicators, get_market_news
-from stocks import get_orderby_criterias, get_filters, get_stock_list, manage_session_filters, search_stocks_by_name, get_stock_profile
+from stocks import get_orderby_criterias, get_filters, get_stock_list, manage_session_filters, search_stocks_by_name, get_stock_profile, get_income_statement
 from admin import update_ibovespa, update_ifix, update_news, update_cdi, update_selic, update_ipca
 
 
@@ -74,7 +74,7 @@ def stocks_list():
     return render_template("stocks-list.html", orderby_criterias=get_orderby_criterias(), filters=get_filters(), stock_list=get_stock_list())
 
 
-@app.route("/stock/<symbol>", methods=["GET", "POSt"])
+@app.route("/stock/<symbol>", methods=["GET", "POST"])
 def stock(symbol=""):
     if request.method == "GET":        
         return render_template("stock.html", stock_profile=get_stock_profile(symbol))
@@ -86,6 +86,11 @@ def stock(symbol=""):
 def search_stocks():                
     stocks = search_stocks_by_name("upper(name)", "like", "%{}%".format(request.args["name"]).upper())    
     return jsonify(stocks)
+
+
+@app.route("/income_statement/<symbol>", methods=["GET"])
+def income_statement(symbol):
+    return jsonify(get_income_statement(symbol))
 
 
 def errorhandler(e):    

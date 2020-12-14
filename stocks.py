@@ -203,3 +203,26 @@ def get_stock_profile(symbol):
         "industry": rows[0][3],
         "longBusinessSummary": rows[0][4]
     }
+
+def get_income_statement(symbol):
+    conn = sqlite3.connect('./db/cs50.db')
+    
+    c = conn.cursor()
+    
+    c.execute("""select income_statement.endDate, income_statement.totalRevenue, income_statement.netIncome
+                 from stock
+                 join income_statement on (income_statement.idstock = stock.id)
+                 where stock.ticker like '{}%'""".format(symbol))
+    
+    rows = c.fetchall()
+
+    income_statement = []
+
+    for row in rows:
+        income_statement.append({
+            "endDate": row[0],
+            "totalRevenue": row[1],
+            "netIncome": row[2]
+        })
+
+    return income_statement
