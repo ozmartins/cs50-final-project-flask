@@ -1,12 +1,19 @@
 income_statement = []
 
 function getIncomeStatement(symbol) {
-    axios.get('/income_statement?symbol=' + symbol).then((response) => {              
-        alert(response.data);
+    axios.get('/income_statement/' + symbol).then((response) => {              
+        income_statement[0] = ['Ano', 'Receita Líquida', 'Lucro Líquido'];        
+        for (var i = 0; i < response.data.length; i++) {
+            income_statement[i+1] = []
+            income_statement[i+1][0] = response.data[i]['endDate']
+            income_statement[i+1][1] = response.data[i]['totalRevenue']
+            income_statement[i+1][2] = response.data[i]['netIncome']
+          }                
+        
     });
 }
 
-getIncomeStatement("ABEV3.SA")
+getIncomeStatement("ABEV3")
 
 // Load the Visualization API and the corechart package.
 google.charts.load('current', {'packages':['corechart']});
@@ -24,21 +31,14 @@ function drawChart() {
     data2.addColumn('number', 'Receita Líquida');
     data2.addColumn('number', 'Lucro Líquido');        
     
-    var data = google.visualization.arrayToDataTable([
-        ['Ano', 'Receita Líquida', 'Lucro Líquido'],
-        ['2015', 150, 35],
-        ['2016', 200, 50],
-        ['2017', 250, 65],
-        ['2018', 300, 75],
-        ['2019', 350, 95]
-    ]);
+    var data = google.visualization.arrayToDataTable(income_statement);
 
     // Set chart options
     var options = {
                     title:'DRE',                       
                     height:500,
                     vAxis: {
-                        title: 'Valor em milhões de reais'
+                        title: 'Valor em reais'
                     }
                 };
 
