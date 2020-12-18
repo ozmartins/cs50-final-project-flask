@@ -204,6 +204,7 @@ def get_stock_profile(symbol):
         "longBusinessSummary": rows[0][4]
     }
 
+
 def get_income_statement(symbol):
     conn = sqlite3.connect('./db/cs50.db')
     
@@ -226,3 +227,50 @@ def get_income_statement(symbol):
         })
 
     return income_statement
+
+def get_cash_flow(symbol):
+    conn = sqlite3.connect('./db/cs50.db')
+    
+    c = conn.cursor()
+    
+    c.execute("""select cash_flow.endDate, cash_flow.totalCashflowsFromInvestingActivities, cash_flow.totalCashFromFinancingActivities, cash_flow.totalCashFromOperatingActivities
+                 from stock
+                 join cash_flow on (cash_flow.idstock = stock.id)
+                 where stock.ticker like '{}%'""".format(symbol))
+    
+    rows = c.fetchall()
+
+    cash_flow = []
+
+    for row in rows:
+        cash_flow.append({
+            "endDate": row[0],
+            "totalCashflowsFromInvestingActivities": row[1],
+            "totalCashFromFinancingActivities": row[2],
+            "totalCashFromOperatingActivities": row[3]
+        })
+
+    return cash_flow
+
+def get_balance_sheet(symbol):
+    conn = sqlite3.connect('./db/cs50.db')
+    
+    c = conn.cursor()
+    
+    c.execute("""select cash_flow.endDate, balance_sheet.cash, balance_sheet.longTermDebt
+                 from stock
+                 join balance_sheet on (balance_sheet.idstock = stock.id)
+                 where stock.ticker like '{}%'""".format(symbol))
+    
+    rows = c.fetchall()
+
+    balance_sheet = []
+
+    for row in rows:
+        balance_sheet.append({
+            "endDate": row[0],
+            "cash": row[1],
+            "longTermDebt": row[2]
+        })
+
+    return balance_sheet

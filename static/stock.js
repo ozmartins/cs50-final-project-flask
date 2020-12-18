@@ -1,4 +1,5 @@
 income_statement = []
+cash_flow = []
 
 function getIncomeStatement(symbol) {
     axios.get('/income_statement/' + symbol).then((response) => {              
@@ -13,18 +14,35 @@ function getIncomeStatement(symbol) {
     });
 }
 
+function getCashFlow(symbol) {
+    axios.get('/cash_flow/' + symbol).then((response) => {              
+        cash_flow[0] = ['Ano', 'FCI', 'FCF', 'FCO'];        
+        for (var i = 0; i < response.data.length; i++) {
+            cash_flow[i+1] = []
+            cash_flow[i+1][0] = response.data[i]['endDate']
+            cash_flow[i+1][1] = response.data[i]['totalCashflowsFromInvestingActivities']
+            cash_flow[i+1][2] = response.data[i]['totalCashFromFinancingActivities']
+            cash_flow[i+1][3] = response.data[i]['totalCashFromOperatingActivities']
+          }                
+        
+    });
+}
+
 getIncomeStatement("ABEV3")
+getCashFlow("ABEV3")
+getBalanceSheet("ABEV3")
 
 // Load the Visualization API and the corechart package.
 google.charts.load('current', {'packages':['corechart']});
 
 // Set a callback to run when the Google Visualization API is loaded.
-google.charts.setOnLoadCallback(drawChart);
+google.charts.setOnLoadCallback(drawChartIncomeStatement);
+google.charts.setOnLoadCallback(drawChartCashFlow);
     
 // Callback that creates and populates a data table,
 // instantiates the pie chart, passes in the data and
 // draws it.
-function drawChart() {
+function drawChartIncomeStatement() {
     // Create the data table.
     var data2 = new google.visualization.DataTable();
     data2.addColumn('string', 'Ano');
@@ -46,4 +64,29 @@ function drawChart() {
     var dre = new google.visualization.ColumnChart (document.getElementById('dre'));        
 
     dre.draw(data, options);
+}
+
+function drawChartCashFlow() {
+    // Create the data table.
+    var data2 = new google.visualization.DataTable();
+    data2.addColumn('string', 'Ano');
+    data2.addColumn('number', 'FCI');
+    data2.addColumn('number', 'FCF'); 
+    data2.addColumn('number', 'FCO'); 
+    
+    var data = google.visualization.arrayToDataTable(cash_flow);
+
+    // Set chart options
+    var options = {
+                    title:'Fluxo de caixa',                       
+                    height:500,
+                    vAxis: {
+                        title: 'Valor em reais'
+                    }
+                };
+
+    // Instantiate and draw our chart, passing in some options.
+    var fluxoCaixa = new google.visualization.ColumnChart (document.getElementById('fluxoCaixa'));        
+
+    fluxoCaixa.draw(data, options);
 }
