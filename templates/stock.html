@@ -3,10 +3,11 @@
 {% block style %}
 <link rel="stylesheet" href="/static/stock.css">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript" src="/static/stock.js"></script>
 {% endblock %}
 
 {% block main %}
+
+<input id="ticker" type="hidden" value="{{stock_profile["ticker"]}}">
 
 <div class="container">
     <div class="stock-header">
@@ -47,7 +48,6 @@
     </div>       
 </div>
 
-<script type="text/javascript">
-    selectTab("stocks-tab");
-</script>
+<script type="text/javascript">selectTab("stocks-tab");</script>
+<script type="text/javascript" src="/static/stock.js"></script>
 {% endblock %}

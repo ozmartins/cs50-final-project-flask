@@ -1,5 +1,6 @@
 income_statement = []
 cash_flow = []
+balance_sheet = []
 
 function getIncomeStatement(symbol) {
     axios.get('/income_statement/' + symbol).then((response) => {              
@@ -28,9 +29,22 @@ function getCashFlow(symbol) {
     });
 }
 
-getIncomeStatement("ABEV3")
-getCashFlow("ABEV3")
-getBalanceSheet("ABEV3")
+function getBalanceSheet(symbol) {
+    axios.get('/balance_sheet/' + symbol).then((response) => {              
+        balance_sheet[0] = ['Ano', 'Caixa', 'Dívida'];        
+        for (var i = 0; i < response.data.length; i++) {
+            balance_sheet[i+1] = []
+            balance_sheet[i+1][0] = response.data[i]['endDate']
+            balance_sheet[i+1][1] = response.data[i]['cash']
+            balance_sheet[i+1][2] = response.data[i]['longTermDebt']            
+          }                
+        
+    });
+}
+
+getIncomeStatement(document.getElementById('ticker').value)
+getCashFlow(document.getElementById('ticker').value)
+getBalanceSheet(document.getElementById('ticker').value)
 
 // Load the Visualization API and the corechart package.
 google.charts.load('current', {'packages':['corechart']});
@@ -38,6 +52,7 @@ google.charts.load('current', {'packages':['corechart']});
 // Set a callback to run when the Google Visualization API is loaded.
 google.charts.setOnLoadCallback(drawChartIncomeStatement);
 google.charts.setOnLoadCallback(drawChartCashFlow);
+google.charts.setOnLoadCallback(drawChartBalanceSheet);
     
 // Callback that creates and populates a data table,
 // instantiates the pie chart, passes in the data and
@@ -89,4 +104,28 @@ function drawChartCashFlow() {
     var fluxoCaixa = new google.visualization.ColumnChart (document.getElementById('fluxoCaixa'));        
 
     fluxoCaixa.draw(data, options);
+}
+
+function drawChartBalanceSheet() {
+    // Create the data table.
+    var data2 = new google.visualization.DataTable();
+    data2.addColumn('string', 'Ano');
+    data2.addColumn('number', 'caixa');
+    data2.addColumn('number', 'Dívida');     
+    
+    var data = google.visualization.arrayToDataTable(balance_sheet);
+
+    // Set chart options
+    var options = {
+                    title:'Caixa e dívida',
+                    height:500,
+                    vAxis: {
+                        title: 'Valor em reais'
+                    }
+                };
+
+    // Instantiate and draw our chart, passing in some options.
+    var balanceSheet = new google.visualization.ColumnChart (document.getElementById('balanceSheet'));        
+
+    balanceSheet.draw(data, options);
 }

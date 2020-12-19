@@ -9,7 +9,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 from helpers import apology
 from indicators import get_market_indicators, get_market_news
-from stocks import get_orderby_criterias, get_filters, get_stock_list, manage_session_filters, search_stocks_by_name, get_stock_profile, get_income_statement, get_cash_flow
+from stocks import get_orderby_criterias, get_filters, get_stock_list, manage_session_filters, search_stocks_by_name, get_stock_profile, get_income_statement, get_cash_flow, get_balance_sheet
 from admin import update_ibovespa, update_ifix, update_news, update_cdi, update_selic, update_ipca
 
 
@@ -92,9 +92,15 @@ def search_stocks():
 def income_statement(symbol):
     return jsonify(get_income_statement(symbol))
 
+
 @app.route("/cash_flow/<symbol>", methods=["GET"])
 def cash_flow(symbol):
     return jsonify(get_cash_flow(symbol))
+
+
+@app.route("/balance_sheet/<symbol>", methods=["GET"])
+def balance_sheet(symbol):
+    return jsonify(get_balance_sheet(symbol))
 
 
 def errorhandler(e):    

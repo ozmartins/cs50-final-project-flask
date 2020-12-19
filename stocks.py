@@ -213,7 +213,7 @@ def get_income_statement(symbol):
     c.execute("""select income_statement.endDate, income_statement.totalRevenue, income_statement.netIncome
                  from stock
                  join income_statement on (income_statement.idstock = stock.id)
-                 where stock.ticker like '{}%'""".format(symbol))
+                 where stock.ticker like '{}%' order by income_statement.endDate""".format(symbol))
     
     rows = c.fetchall()
 
@@ -236,7 +236,7 @@ def get_cash_flow(symbol):
     c.execute("""select cash_flow.endDate, cash_flow.totalCashflowsFromInvestingActivities, cash_flow.totalCashFromFinancingActivities, cash_flow.totalCashFromOperatingActivities
                  from stock
                  join cash_flow on (cash_flow.idstock = stock.id)
-                 where stock.ticker like '{}%'""".format(symbol))
+                 where stock.ticker like '{}%' order by cash_flow.endDate""".format(symbol))
     
     rows = c.fetchall()
 
@@ -257,10 +257,10 @@ def get_balance_sheet(symbol):
     
     c = conn.cursor()
     
-    c.execute("""select cash_flow.endDate, balance_sheet.cash, balance_sheet.longTermDebt
+    c.execute("""select balance_sheet.endDate, balance_sheet.cash, balance_sheet.longTermDebt
                  from stock
                  join balance_sheet on (balance_sheet.idstock = stock.id)
-                 where stock.ticker like '{}%'""".format(symbol))
+                 where stock.ticker like '{}%' order by balance_sheet.endDate""".format(symbol))
     
     rows = c.fetchall()
 
