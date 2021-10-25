@@ -29,5 +29,3 @@ heroku ps:scale web=1 -a cs50-final-project-flask
 heroku logs --tail -a cs50-final-project-flask
 
 https://cs50-final-project-flask.herokuapp.com/
-
-TESTE
