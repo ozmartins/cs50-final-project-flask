@@ -129,3 +129,7 @@ function drawChartBalanceSheet() {
 
     balanceSheet.draw(data, options);
 }
+
+drawChartIncomeStatement();
+drawChartCashFlow();
+drawChartBalanceSheet();
