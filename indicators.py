@@ -29,7 +29,7 @@ def get_market_indicators():
     
     rows = c.fetchall()
     
-    locale.setlocale(locale.LC_ALL, 'pt')  # Use '' for auto, or force e.g. to 'en_US.UTF-8'
+    locale.setlocale(locale.LC_ALL, 'en')  # Use '' for auto, or force e.g. to 'en_US.UTF-8'
 
     ibovespa = {
             "current": '{:n}'.format(rows[0][0]),
