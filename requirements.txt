@@ -24,7 +24,7 @@ pytz==2021.3
 requests==2.26.0
 six==1.16.0
 sqlparse==0.4.2
-urllib3==1.26.7
+urllib3==1.26.18
 virtualenv==20.9.0
 waitress>=2.1.2
 Werkzeug==2.0.2
